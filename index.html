@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Электроннай тылдьыт — Словарь и песни</title>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+/* Стили остаются такими же как в предыдущем коде */
+:root{
+  --bg:#f6efe6;
+  --card:#fffdf7;
+  --paper:#f3ead7;
+  --accent:#6b4f2b;
+  --text:#2b2b2b;
+  --muted:#6b6b6b;
+  --shadow: rgba(43,43,43,0.08);
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Merriweather', Georgia, serif;background:linear-gradient(180deg,var(--bg),#efe6d5);color:var(--text);-webkit-font-smoothing:antialiased;}
+.header{padding:1.2rem 1.6rem;background:transparent;border-bottom:1px solid rgba(107,79,43,0.1);}
+.header-content{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;}
+.title{font-size:1.4rem;font-weight:700;color:var(--accent);}
+.nav{display:flex;gap:1.5rem;}
+.nav-btn{padding:0.5rem 1rem;border:none;background:transparent;border-radius:8px;cursor:pointer;font-weight:600;color:var(--muted);transition:all 0.3s;}
+.nav-btn.active{background:var(--accent);color:#fff;box-shadow:0 4px 14px rgba(107,79,43,0.12);}
+.nav-btn:hover:not(.active){background:rgba(107,79,43,0.1);}
+.subtitle{font-size:0.9rem;color:var(--muted);margin-top:0.2rem;}
+
+.container{max-width:1100px;margin:1rem auto;padding:1rem;display:flex;gap:1.25rem}
+.sidebar{width:280px;flex-shrink:0;position:sticky;top:20px;height:calc(100vh - 40px);overflow:auto;padding:1rem;background:transparent}
+.search{width:100%;padding:0.7rem 0.9rem;border-radius:10px;border:1px solid rgba(107,79,43,0.12);background:linear-gradient(180deg,#fff,#fffaf0)}
+.letters{margin-top:0.8rem;display:flex;flex-wrap:wrap;gap:0.35rem}
+.letters button{background:transparent;border:1px solid rgba(107,79,43,0.08);padding:0.35rem 0.6rem;border-radius:6px;cursor:pointer;font-weight:600;color:var(--accent)}
+.letters button.active{background:var(--accent);color:#fff;box-shadow:0 4px 14px rgba(107,79,43,0.12);transform:translateY(-2px)}
+
+.fav-title{margin-top:1rem;font-size:0.95rem;font-weight:700;color:var(--accent)}
+.fav-list{margin-top:0.5rem;background:linear-gradient(180deg,#fff,#fffaf0);padding:0.5rem;border-radius:8px;border:1px solid rgba(43,43,43,0.03);max-height:240px;overflow:auto}
+
+.list{flex:1;padding:0.2rem 0.25rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1rem;align-items:start}
+.card{background:var(--card);border-radius:12px;padding:1rem 1.1rem;box-shadow:0 8px 24px var(--shadow);border:1px solid rgba(43,43,43,0.03);position:relative;transition:transform .25s,box-shadow .25s;cursor:pointer;}
+.card:hover{transform:translateY(-6px)}
+.card::before{content:'';position:absolute;left:14px;top:14px;width:40px;height:40px;border-radius:8px;background:linear-gradient(180deg,#fffaf0,#f2e6cf);box-shadow:inset 0 -2px 6px rgba(0,0,0,0.03)}
+.word{margin:0;padding-left:60px;font-size:1.12rem;font-weight:700;color:var(--accent)}
+.pos{font-weight:600;font-size:0.86rem;color:var(--muted);margin-left:8px}
+.def{margin-top:0.5rem;padding-left:60px;color:var(--text);line-height:1.55;white-space:pre-line}
+.actions{margin-top:0.8rem;padding-left:60px;display:flex;gap:0.5rem}
+.btn{border:1px solid rgba(43,43,43,0.06);background:linear-gradient(180deg,#fff,#fffaf0);padding:0.4rem 0.7rem;border-radius:8px;cursor:pointer;font-weight:600}
+.btn:hover{background:var(--accent);color:#fff;transform:translateY(-2px)}
+
+/* Стили для страницы песен */
+.songs-page{display:none;}
+.song-card{background:var(--card);border-radius:12px;padding:1.5rem;box-shadow:0 8px 24px var(--shadow);border:1px solid rgba(43,43,43,0.03);margin-bottom:1.5rem;}
+.song-title{font-size:1.3rem;font-weight:700;color:var(--accent);margin-bottom:1rem;border-bottom:2px solid var(--accent);padding-bottom:0.5rem;}
+.song-content{color:var(--text);line-height:1.8;white-space:pre-line;font-size:0.95rem;}
+.song-meta{color:var(--muted);font-size:0.85rem;margin-top:1rem;font-style:italic;}
+
+/* Аудио плеер */
+.audio-player{background:linear-gradient(180deg,#fffaf0,#f2e6cf);border-radius:12px;padding:1rem;margin:1rem 0;border:1px solid rgba(107,79,43,0.1);}
+.player-controls{display:flex;align-items:center;gap:1rem;margin-bottom:0.5rem;}
+.play-btn{background:var(--accent);color:white;border:none;border-radius:50%;width:40px;height:40px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.2rem;transition:all 0.3s;}
+.play-btn:hover{transform:scale(1.1);box-shadow:0 4px 12px rgba(107,79,43,0.3);}
+.progress-container{flex:1;background:rgba(107,79,43,0.1);border-radius:10px;height:6px;cursor:pointer;position:relative;}
+.progress-bar{background:var(--accent);border-radius:10px;height:100%;width:0%;transition:width 0.1s;}
+.time{display:flex;justify-content:space-between;color:var(--muted);font-size:0.8rem;}
+.volume-controls{display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;}
+.volume-icon{color:var(--muted);font-size:1rem;}
+.volume-slider{flex:1;background:rgba(107,79,43,0.1);border-radius:10px;height:4px;cursor:pointer;}
+
+.header-note{text-align:center;color:var(--muted);font-size:0.9rem;margin-top:0.5rem}
+
+/* Модальное окно */
+.modal{display:none;position:fixed;z-index:1000;left:0;top:0;width:100%;height:100%;background-color:rgba(0,0,0,0.5);backdrop-filter:blur(4px)}
+.modal-content{background:var(--card);margin:2% auto;padding:0;border-radius:16px;width:90%;max-width:600px;max-height:90vh;overflow:auto;box-shadow:0 20px 60px rgba(0,0,0,0.3);border:1px solid rgba(107,79,43,0.1)}
+.modal-header{padding:1.5rem;border-bottom:1px solid rgba(107,79,43,0.1);display:flex;justify-content:space-between;align-items:center;background:linear-gradient(180deg,#fffaf0,#f2e6cf)}
+.modal-title{font-size:1.4rem;font-weight:700;color:var(--accent);margin:0}
+.close{color:#aaa;float:right;font-size:2rem;font-weight:bold;cursor:pointer;line-height:1;transition:color .3s}
+.close:hover{color:var(--accent)}
+.modal-body{padding:1.5rem}
+.word-image{width:100%;height:200px;background:linear-gradient(135deg,#f3ead7,#e8dcc3);border-radius:12px;margin-bottom:1.5rem;display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px solid rgba(107,79,43,0.1)}
+.word-image img{width:100%;height:100%;object-fit:cover;display:none}
+.word-image .placeholder{color:var(--muted);font-size:1rem;text-align:center;padding:2rem}
+.word-info{margin-bottom:1.5rem}
+.info-row{display:flex;margin-bottom:0.8rem;padding:0.5rem;background:rgba(246,239,230,0.5);border-radius:8px}
+.info-label{font-weight:700;color:var(--accent);min-width:120px}
+.info-value{flex:1;color:var(--text)}
+.modal-actions{display:flex;gap:0.8rem;justify-content:flex-end;border-top:1px solid rgba(107,79,43,0.1);padding-top:1.5rem}
+
+.audio-note{background:#fffaf0;padding:0.8rem;border-radius:8px;margin:1rem 0;font-size:0.9rem;color:var(--muted);border-left:4px solid var(--accent);}
+
+@media (max-width:900px){.container{flex-direction:column}.sidebar{width:100%;position:relative;height:auto}}
+@media (max-width:600px){.modal-content{width:95%;margin:5% auto}}
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="header-content">
+    <div>
+      <div class="title">Электроннай тылдьыт</div>
+      <div class="subtitle" id="pageSubtitle">Словарь якутского языка</div>
+    </div>
+    <nav class="nav">
+      <button class="nav-btn active" onclick="showPage('dictionary')">📚 Словарь</button>
+      <button class="nav-btn" onclick="showPage('songs')">🎵 Песни</button>
+    </nav>
+  </div>
+</header>
+
+<!-- Страница словаря -->
+<div id="dictionary-page" class="container">
+  <aside class="sidebar">
+    <input id="search" class="search" placeholder="🔍 Поиск слова..." />
+    <div class="letters" id="letters"></div>
+    <div class="fav-title">⭐ Избранное</div>
+    <ul class="fav-list" id="favorites"><li style="color:var(--muted)">Пока нет</li></ul>
+    <div class="header-note">Подсказка: нажмите на слово для подробной информации</div>
+  </aside>
+
+  <section class="list" id="list"></section>
+</div>
+
+<!-- Страница песен -->
+<div id="songs-page" class="container songs-page">
+  <div style="width:100%;">
+    <div class="audio-note">
+      💡 <strong>Как добавить музыку:</strong> Замените ссылки в коде на реальные MP3 файлы. 
+      Можно использовать SoundCloud, Яндекс.Музыку или загрузить на любой файловый хостинг.
+    </div>
+
+    <div class="song-card">
+      <div class="song-title">Сайыҥҥы</div>
+      <div class="audio-player" id="player-sayynghi">
+        <div class="player-controls">
+          <button class="play-btn" onclick="togglePlay('sayynghi')">▶</button>
+          <div class="progress-container" onclick="seek('sayynghi', event)">
+            <div class="progress-bar" id="progress-sayynghi"></div>
+          </div>
+          <span id="time-sayynghi">0:00 / 0:00</span>
+        </div>
+        <div class="time">
+          <span id="currentTime-sayynghi">0:00</span>
+          <span id="duration-sayynghi">0:00</span>
+        </div>
+        <div class="volume-controls">
+          <span class="volume-icon">🔊</span>
+          <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1" onchange="setVolume('sayynghi', this.value)">
+        </div>
+      </div>
+      <div class="song-content">Саймаарыйар күнүм тахсан
+Аан дойдубар анаарар,
+Арылы тиэрбэс көлүччэм
+Көмүс долгунун көтөҕөр.
+
+Сыһыыларым сиккиэринэн 
+Сыймаарыччы тарааннылар,
+Сир симэҕэ сибэккилэрим
+Сиигинэн симириҥнииллэр.
+
+Тунах үрүмэччилэрэ туртаҥнаһа
+Хонууга хойдо тэлээрбиттэр,
+Ырыа чыычаахтарым куоталаһа
+Чыбыгырыы чугдаарбыттар.
+
+Оой, арылыйар алааһым,
+Уйгу сайынтан итирдим,
+Көҥүл санаабын батыһан
+Күн көрүгэр көҕүйдүм.
+
+Тунах үрүмэччитэ буоламмын
+Сир симэҕин ситэрсиэм,
+Күөрэгэй чычаах буоламмын
+Күөх дойдубун хоһуйуом.</div>
+      <div class="song-meta">Мел. Ульяна Сергучева</div>
+    </div>
+
+    <!-- Остальные песни с таким же плеером -->
+    <div class="song-card">
+      <div class="song-title">Суоллар</div>
+      <div class="audio-player" id="player-suollar">
+        <div class="player-controls">
+          <button class="play-btn" onclick="togglePlay('suollar')">▶</button>
+          <div class="progress-container" onclick="seek('suollar', event)">
+            <div class="progress-bar" id="progress-suollar"></div>
+          </div>
+          <span id="time-suollar">0:00 / 0:00</span>
+        </div>
+        <div class="time">
+          <span id="currentTime-suollar">0:00</span>
+          <span id="duration-suollar">0:00</span>
+        </div>
+        <div class="volume-controls">
+          <span class="volume-icon">🔊</span>
+          <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1" onchange="setVolume('suollar', this.value)">
+        </div>
+      </div>
+      <div class="song-content">Мин үйэм улуу хорук тымырдара буолан,
+Айгысталлар аараан аартыктар...
+Ол хорук тымыр биир кыһыл таммаҕа буола,
+Мин күө-дьаа тахсабын айан суолугар.
+
+Арыт ытыллыбыт быыра ох оҕото буолан, 
+Ахсым айаннары айанныыбын,
+Арыт тумараҕа муммут тугутчаан курдук,
+Туора дьон ыырдарыгар мунчаарабын.
+
+Оо, ол эрээри хайаан да өтөхпөр төннөбүн,
+Ырбыт айан атыныы иҥэрсийэ...
+Ол улуу түбэлтэрэн кэлээтин атыҥырыы көрөбүн
+Төрөөбүт алааспын мыына, соҥуйа...</div>
+      <div class="song-meta">Ырыа хомуурунньуга</div>
+    </div>
+
+    <!-- Добавьте остальные песни по аналогии -->
+  </div>
+</div>
+
+<!-- Модальное окно -->
+<div id="wordModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 class="modal-title" id="modalWordTitle"></h2>
+      <span class="close">&times;</span>
+    </div>
+    <div class="modal-body">
+      <div class="word-image">
+        <img id="modalWordImage" src="" alt="">
+        <div class="placeholder">Изображение отсутствует</div>
+      </div>
+      <div class="word-info">
+        <div class="info-row">
+          <div class="info-label">Слово:</div>
+          <div class="info-value" id="modalWord"></div>
+        </div>
+        <div class="info-row">
+          <div class="info-label">Часть речи:</div>
+          <div class="info-value" id="modalPos"></div>
+        </div>
+        <div class="info-row">
+          <div class="info-label">Определение:</div>
+          <div class="info-value" id="modalDefinition"></div>
+        </div>
+        <div class="info-row">
+          <div class="info-label">Примеры:</div>
+          <div class="info-value" id="modalExamples"></div>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn" onclick="copyText(currentWordId)">📋 Копировать</button>
+        <button class="btn" onclick="toggleFav(currentWordId)">⭐ Избранное</button>
+        <button class="btn" onclick="closeModal()">✕ Закрыть</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer style="text-align:center;padding:1rem 0;color:var(--muted)">© 2025 «Электроннай тылдьыт» — словарь и песни</footer>
+
+<script>
+// 🔧 ЗДЕСЬ НУЖНО ЗАМЕНИТЬ ССЫЛКИ НА РЕАЛЬНЫЕ АУДИОФАЙЛЫ
+const audioFiles = {
+  'sayynghi': 'https://drive.google.com/file/d/1U_Fuiom1W4rIOFowxANqhjgo9eH7aR97/view?usp=sharing',
+  'suollar': 'https://ваш-хостинг.com/audio/suollar.mp3',
+  'sakha-unkuute': 'https://ваш-хостинг.com/audio/sakha-unkuute.mp3',
+  'ferma-kyrgyttara': 'https://ваш-хостинг.com/audio/ferma-kyrgyttara.mp3',
+  'kihiyehe-toroobyt-doydu': 'https://ваш-хостинг.com/audio/kihiyehe-toroobyt-doydu.mp3'
+};
+
+const audioPlayers = {};
+let currentAudio = null;
+
+// Создаем аудио элементы
+Object.keys(audioFiles).forEach(songId => {
+  const audio = new Audio();
+  audio.src = audioFiles[songId];
+  audio.volume = 1;
+  
+  audio.addEventListener('loadedmetadata', () => {
+    document.getElementById(`duration-${songId}`).textContent = formatTime(audio.duration);
+  });
+  
+  audio.addEventListener('timeupdate', () => {
+    updateProgress(songId);
+  });
+  
+  audio.addEventListener('ended', () => {
+    resetPlayer(songId);
+  });
+  
+  audioPlayers[songId] = audio;
+});
+
+function togglePlay(songId) {
+  const audio = audioPlayers[songId];
+  const playBtn = document.querySelector(`#player-${songId} .play-btn`);
+  
+  if (currentAudio && currentAudio !== audio) {
+    currentAudio.pause();
+    resetPlayer(getSongIdByAudio(currentAudio));
+  }
+  
+  if (audio.paused) {
+    audio.play().catch(error => {
+      console.log('Ошибка воспроизведения:', error);
+      alert('Аудиофайл не найден. Замените ссылку в коде на реальный MP3 файл.');
+    });
+    playBtn.textContent = '⏸';
+    currentAudio = audio;
+  } else {
+    audio.pause();
+    playBtn.textContent = '▶';
+  }
+}
+
+function updateProgress(songId) {
+  const audio = audioPlayers[songId];
+  if (audio.duration) {
+    const progress = (audio.currentTime / audio.duration) * 100;
+    document.getElementById(`progress-${songId}`).style.width = `${progress}%`;
+    document.getElementById(`currentTime-${songId}`).textContent = formatTime(audio.currentTime);
+    document.getElementById(`time-${songId}`).textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
+  }
+}
+
+function seek(songId, event) {
+  const audio = audioPlayers[songId];
+  const progressContainer = event.currentTarget;
+  const clickX = event.offsetX;
+  const width = progressContainer.offsetWidth;
+  const seekTime = (clickX / width) * audio.duration;
+  audio.currentTime = seekTime;
+}
+
+function setVolume(songId, volume) {
+  const audio = audioPlayers[songId];
+  audio.volume = volume;
+}
+
+function resetPlayer(songId) {
+  const playBtn = document.querySelector(`#player-${songId} .play-btn`);
+  playBtn.textContent = '▶';
+  document.getElementById(`progress-${songId}`).style.width = '0%';
+  document.getElementById(`currentTime-${songId}`).textContent = '0:00';
+}
+
+function formatTime(seconds) {
+  if (isNaN(seconds)) return '0:00';
+  const mins = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60);
+  return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+}
+
+function getSongIdByAudio(audio) {
+  for (const [songId, audioObj] of Object.entries(audioPlayers)) {
+    if (audioObj === audio) return songId;
+  }
+  return null;
+}
+
+// Остальной код словаря...
+const entries = [
+  {
+    "id": 20,
+    "word": "Ача",
+    "pos": "сущ.",
+    "definition": "бурдук соломотугар маарынныыр, уһун аҕыйах сэбирдэхтээх, бөҕө силистээх кытаанах от. Пырей.",
+    "examples": "Саҥа тыллар ачам салаата хамсыы-хамсыы үүнэн барар. «Саас» Алпаабыт",
+    "image": "https://via.placeholder.com/400x200/f3ead7/6b4f2b?text=Ача"
+  }
+  // ... остальные слова
+];
+
+let favorites = new Set();
+let activeLetter = null;
+let currentWordId = null;
+let currentPage = 'dictionary';
+
+const lettersEl = document.getElementById('letters');
+const listEl = document.getElementById('list');
+const searchEl = document.getElementById('search');
+const favEl = document.getElementById('favorites');
+const modal = document.getElementById('wordModal');
+const closeBtn = document.querySelector('.close');
+
+function init() {
+  renderLetters();
+  renderList();
+  searchEl.addEventListener('input', renderList);
+  
+  closeBtn.addEventListener('click', closeModal);
+  window.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+}
+
+function showPage(page) {
+  document.getElementById('dictionary-page').style.display = 'none';
+  document.getElementById('songs-page').style.display = 'none';
+  
+  document.querySelectorAll('.nav-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  
+  if (page === 'dictionary') {
+    document.getElementById('dictionary-page').style.display = 'flex';
+    document.querySelector('.nav-btn[onclick="showPage(\'dictionary\')"]').classList.add('active');
+    document.getElementById('pageSubtitle').textContent = 'Словарь якутского языка';
+    currentPage = 'dictionary';
+  } else if (page === 'songs') {
+    document.getElementById('songs-page').style.display = 'flex';
+    document.querySelector('.nav-btn[onclick="showPage(\'songs\')"]').classList.add('active');
+    document.getElementById('pageSubtitle').textContent = 'Якутские песни и стихи';
+    currentPage = 'songs';
+  }
+}
+
+// ... остальные функции словаря
+
+function renderLetters() {
+  const letters = [...new Set(entries.map(e => (e.word||'')[0]?.toUpperCase()))].filter(Boolean).sort((a,b)=> a.localeCompare(b,'ru'));
+  lettersEl.innerHTML = '<button data-letter="" class="active">Все</button>' + letters.map(l=>`<button data-letter="${l}">${l}</button>`).join('');
+  lettersEl.querySelectorAll('button').forEach(btn=>{
+    btn.addEventListener('click', ()=> {
+      activeLetter = btn.dataset.letter || null;
+      lettersEl.querySelectorAll('button').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      renderList();
+    });
+  });
+}
+
+function renderList() {
+  const q = (searchEl.value||'').trim().toLowerCase();
+  const filtered = entries.filter(e=>{
+    if (activeLetter && (e.word||'')[0].toUpperCase() !== activeLetter) return false;
+    if (!q) return true;
+    return (e.word||'').toLowerCase().includes(q);
+  }).sort((a,b)=> (a.word||'').localeCompare(b.word||'','ru'));
+
+  if (filtered.length === 0) {
+    listEl.innerHTML = '<div style="grid-column:1/-1;padding:2rem;background:linear-gradient(180deg,#fff,#fffaf0);border-radius:12px;text-align:center;color:var(--muted)">Ничего не найдено</div>';
+    favEl.innerHTML = '<li style="color:var(--muted)">Пока нет</li>';
+    return;
+  }
+
+  listEl.innerHTML = filtered.map(item => `
+    <article class="card" data-id="${item.id}" onclick="openModal(${item.id})">
+      <h3 class="word">${escapeHtml(item.word)} <span class="pos">${escapeHtml(item.pos||'')}</span></h3>
+      <div class="def">${escapeHtml((item.definition||'').substring(0, 100) + '...')}</div>
+      <div class="actions">
+        <button class="btn" onclick="event.stopPropagation();openModal(${item.id})">📖 Подробнее</button>
+        <button class="btn" onclick="event.stopPropagation();toggleFav(${item.id})">${favorites.has(item.id)?'★':'☆'} Избранное</button>
+      </div>
+    </article>
+  `).join('');
+  renderFavorites();
+}
+
+function renderFavorites() {
+  const favs = entries.filter(e => favorites.has(e.id));
+  if (favs.length === 0) {
+    favEl.innerHTML = '<li style="color:var(--muted)">Пока нет</li>';
+    return;
+  }
+  favEl.innerHTML = favs.map(f=>`<li onclick="openModal(${f.id})" style="cursor:pointer;padding:0.2rem 0;">${escapeHtml(f.word)}</li>`).join('');
+}
+
+function openModal(id) {
+  const item = entries.find(e => e.id === id);
+  if (!item) return;
+  
+  currentWordId = id;
+  
+  document.getElementById('modalWordTitle').textContent = item.word;
+  document.getElementById('modalWord').textContent = item.word;
+  document.getElementById('modalPos').textContent = item.pos || 'не указано';
+  document.getElementById('modalDefinition').textContent = item.definition || 'нет определения';
+  document.getElementById('modalExamples').textContent = item.examples || 'примеры отсутствуют';
+  
+  const img = document.getElementById('modalWordImage');
+  const placeholder = document.querySelector('.word-image .placeholder');
+  
+  if (item.image) {
+    img.src = item.image;
+    img.style.display = 'block';
+    placeholder.style.display = 'none';
+  } else {
+    img.style.display = 'none';
+    placeholder.style.display = 'block';
+  }
+  
+  modal.style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  modal.style.display = 'none';
+  document.body.style.overflow = 'auto';
+}
+
+function toggleFav(id) {
+  if (favorites.has(id)) {
+    favorites.delete(id);
+  } else {
+    favorites.add(id);
+  }
+  renderList();
+  renderFavorites();
+}
+
+function copyText(id) {
+  const item = entries.find(e=>e.id===id);
+  if (!item) return;
+  const txt = `${item.word} — ${item.definition}`;
+  navigator.clipboard.writeText(txt).then(()=> {
+    alert('Скопировано: ' + item.word);
+  });
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str)
+    .replaceAll('&','&amp;')
+    .replaceAll('<','&lt;')
+    .replaceAll('>','&gt;')
+    .replaceAll('"','&quot;')
+    .replaceAll("'",'&#39;');
+}
+
+init();
+</script>
+</body>
+</html>

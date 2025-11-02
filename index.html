@@ -1225,9 +1225,30 @@ input:focus {
           <div class="song-meta">Ырыа хомуурунньуга</div>
         </div>
 
-        <!-- Песня 6 -->
+        <!-- Песня 6 с аудиоплеером -->
         <div class="song-card">
           <div class="song-title">Бу тыллар буолбатах – кубалар</div>
+          <div class="audio-player" id="player-bu-tyllar">
+            <audio id="audio-bu-tyllar" preload="metadata">
+              <source src="songs/bu-tyllar.mp3" type="audio/mpeg">
+              <source src="songs/bu-tyllar.ogg" type="audio/ogg">
+              Ваш браузер не поддерживает аудио элементы.
+            </audio>
+            <div class="player-controls">
+              <button class="play-btn" onclick="togglePlay('bu-tyllar')">▶</button>
+              <div class="progress-container" onclick="seek('bu-tyllar', event)">
+                <div class="progress-bar" id="progress-bu-tyllar"></div>
+              </div>
+              <div class="time">
+                <span id="currentTime-bu-tyllar">0:00</span>
+                <span id="duration-bu-tyllar">0:00</span>
+              </div>
+            </div>
+            <div class="volume-controls">
+              <span class="volume-icon">🔊</span>
+              <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1" onchange="setVolume('bu-tyllar', this.value)">
+            </div>
+          </div>
           <div class="song-content">Бу тыллар буолбатах – кубалар.
 Сааскылыы таптаһар кубалар,
 Ып-ыраас, муус маҥан кубалар
@@ -1245,9 +1266,30 @@ input:focus {
           <div class="song-meta">Ырыа хомуурунньуга</div>
         </div>
 
-        <!-- Песня 7 -->
+        <!-- Песня 7 с аудиоплеером -->
         <div class="song-card">
           <div class="song-title">Доҕоччугуом, тоҕо маннык?..</div>
+          <div class="audio-player" id="player-dogchchuguom">
+            <audio id="audio-dogchchuguom" preload="metadata">
+              <source src="songs/dogchchuguom.mp3" type="audio/mpeg">
+              <source src="songs/dogchchuguom.ogg" type="audio/ogg">
+              Ваш браузер не поддерживает аудио элементы.
+            </audio>
+            <div class="player-controls">
+              <button class="play-btn" onclick="togglePlay('dogchchuguom')">▶</button>
+              <div class="progress-container" onclick="seek('dogchchuguom', event)">
+                <div class="progress-bar" id="progress-dogchchuguom"></div>
+              </div>
+              <div class="time">
+                <span id="currentTime-dogchchuguom">0:00</span>
+                <span id="duration-dogchchuguom">0:00</span>
+              </div>
+            </div>
+            <div class="volume-controls">
+              <span class="volume-icon">🔊</span>
+              <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1" onchange="setVolume('dogchchuguom', this.value)">
+            </div>
+          </div>
           <div class="song-content">Доҕоччугуом, тоҕо маннык
 Тоҥкурууннук  көрсөн,
 Туохтан дууһаҥ туоххаһыйан
@@ -1270,9 +1312,30 @@ input:focus {
           <div class="song-meta">Ырыа хомуурунньуга</div>
         </div>
 
-        <!-- Песня 8 -->
+        <!-- Песня 8 с аудиоплеером -->
         <div class="song-card">
           <div class="song-title">Доҕоруом, дабай күөх сыырдаргын</div>
+          <div class="audio-player" id="player-dogoruom">
+            <audio id="audio-dogoruom" preload="metadata">
+              <source src="songs/dogoruom.mp3" type="audio/mpeg">
+              <source src="songs/dogoruom.ogg" type="audio/ogg">
+              Ваш браузер не поддерживает аудио элементы.
+            </audio>
+            <div class="player-controls">
+              <button class="play-btn" onclick="togglePlay('dogoruom')">▶</button>
+              <div class="progress-container" onclick="seek('dogoruom', event)">
+                <div class="progress-bar" id="progress-dogoruom"></div>
+              </div>
+              <div class="time">
+                <span id="currentTime-dogoruom">0:00</span>
+                <span id="duration-dogoruom">0:00</span>
+              </div>
+            </div>
+            <div class="volume-controls">
+              <span class="volume-icon">🔊</span>
+              <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1" onchange="setVolume('dogoruom', this.value)">
+            </div>
+          </div>
           <div class="song-content">Доҕоруом, дабай күөх сыырдаргын,
 Мырааҥҥа көрүс күн тахсыытын.
 Эн өрүү инники сырдыыгын,
@@ -1296,9 +1359,30 @@ input:focus {
           <div class="song-meta">Ырыа хомуурунньуга</div>
         </div>
 
-        <!-- Песня 9 -->
+        <!-- Песня 9 с аудиоплеером -->
         <div class="song-card">
           <div class="song-title">Эрэн миэхэ</div>
+          <div class="audio-player" id="player-eren-mihe">
+            <audio id="audio-eren-mihe" preload="metadata">
+              <source src="songs/eren-mihe.mp3" type="audio/mpeg">
+              <source src="songs/eren-mihe.ogg" type="audio/ogg">
+              Ваш браузер не поддерживает аудио элементы.
+            </audio>
+            <div class="player-controls">
+              <button class="play-btn" onclick="togglePlay('eren-mihe')">▶</button>
+              <div class="progress-container" onclick="seek('eren-mihe', event)">
+                <div class="progress-bar" id="progress-eren-mihe"></div>
+              </div>
+              <div class="time">
+                <span id="currentTime-eren-mihe">0:00</span>
+                <span id="duration-eren-mihe">0:00</span>
+              </div>
+            </div>
+            <div class="volume-controls">
+              <span class="volume-icon">🔊</span>
+              <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1" onchange="setVolume('eren-mihe', this.value)">
+            </div>
+          </div>
           <div class="song-content">Эрэн миэхэ,
 Эрэн миэхэ...
 Эрэн илиим эрчимигэр,
@@ -1337,9 +1421,30 @@ input:focus {
           <div class="song-meta">Мел. Күннэй</div>
         </div>
 
-        <!-- Песня 10 -->
+        <!-- Песня 10 с аудиоплеером -->
         <div class="song-card">
           <div class="song-title">Күһүн</div>
+          <div class="audio-player" id="player-kuuhun">
+            <audio id="audio-kuuhun" preload="metadata">
+              <source src="songs/kuuhun.mp3" type="audio/mpeg">
+              <source src="songs/kuuhun.ogg" type="audio/ogg">
+              Ваш браузер не поддерживает аудио элементы.
+            </audio>
+            <div class="player-controls">
+              <button class="play-btn" onclick="togglePlay('kuuhun')">▶</button>
+              <div class="progress-container" onclick="seek('kuuhun', event)">
+                <div class="progress-bar" id="progress-kuuhun"></div>
+              </div>
+              <div class="time">
+                <span id="currentTime-kuuhun">0:00</span>
+                <span id="duration-kuuhun">0:00</span>
+              </div>
+            </div>
+            <div class="volume-controls">
+              <span class="volume-icon">🔊</span>
+              <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1" onchange="setVolume('kuuhun', this.value)">
+            </div>
+          </div>
           <div class="song-content">Хайдах эрэ туспатык
 Миигин өрүү долгутар
 Күһүҥҥү тыам нап-намыын
@@ -1376,7 +1481,6 @@ input:focus {
 Куру-һары чуумпута.</div>
           <div class="song-meta">Ырыа хомуурунньуга</div>
         </div>
-
         <!-- Добавьте остальные песни по аналогии -->
       </div>
     </div>
@@ -2254,7 +2358,11 @@ const audioPlayers = {};
 
 // Инициализация аудиоплееров
 function initAudioPlayers() {
-  const songs = ['sayynghi', 'suollar', 'sakha-unkuute', 'ferma-kyrgyttara', 'kihiyehe-toroobyt-doydu'];
+  const songs = [
+    'sayynghi', 'suollar', 'sakha-unkuute', 'ferma-kyrgyttara', 
+    'kihiyehe-toroobyt-doydu', 'bu-tyllar', 'dogchchuguom', 
+    'dogoruom', 'eren-mihe', 'kuuhun'
+  ];
   
   songs.forEach(songId => {
     const audio = document.getElementById(`audio-${songId}`);

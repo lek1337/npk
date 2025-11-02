@@ -7,96 +7,906 @@
 <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#f6efe6;
-  --card:#fffdf7;
-  --paper:#f3ead7;
-  --accent:#6b4f2b;
+  --bg:#f8f4f0;
+  --card:#fffaf5;
+  --paper:#f5eee6;
+  --accent:#8B4513;
   --text:#2b2b2b;
-  --muted:#6b6b6b;
-  --shadow: rgba(43,43,43,0.08);
+  --muted:#7d6b5b;
+  --shadow: rgba(107,79,43,0.15);
 }
-*{box-sizing:border-box}
-body{margin:0;font-family:'Merriweather', Georgia, serif;background:linear-gradient(180deg,var(--bg),#efe6d5);color:var(--text);-webkit-font-smoothing:antialiased;}
-.header{padding:1.2rem 1.6rem;background:transparent;border-bottom:1px solid rgba(107,79,43,0.1);}
-.header-content{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;}
-.title{font-size:1.4rem;font-weight:700;color:var(--accent);}
-.nav{display:flex;gap:1.5rem;}
-.nav-btn{padding:0.5rem 1rem;border:none;background:transparent;border-radius:8px;cursor:pointer;font-weight:600;color:var(--muted);transition:all 0.3s;}
-.nav-btn.active{background:var(--accent);color:#fff;box-shadow:0 4px 14px rgba(107,79,43,0.12);}
-.nav-btn:hover:not(.active){background:rgba(107,79,43,0.1);}
-.subtitle{font-size:0.9rem;color:var(--muted);margin-top:0.2rem;}
 
-.container{max-width:1100px;margin:1rem auto;padding:1rem;display:flex;gap:1.25rem}
-.sidebar{width:280px;flex-shrink:0;position:sticky;top:20px;height:calc(100vh - 40px);overflow:auto;padding:1rem;background:transparent}
-.search{width:100%;padding:0.7rem 0.9rem;border-radius:10px;border:1px solid rgba(107,79,43,0.12);background:linear-gradient(180deg,#fff,#fffaf0)}
-.letters{margin-top:0.8rem;display:flex;flex-wrap:wrap;gap:0.35rem}
-.letters button{background:transparent;border:1px solid rgba(107,79,43,0.08);padding:0.35rem 0.6rem;border-radius:6px;cursor:pointer;font-weight:600;color:var(--accent)}
-.letters button.active{background:var(--accent);color:#fff;box-shadow:0 4px 14px rgba(107,79,43,0.12);transform:translateY(-2px)}
+/* АНИМАЦИИ ФОНА */
+@keyframes gradient-flow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
 
-.fav-title{margin-top:1rem;font-size:0.95rem;font-weight:700;color:var(--accent)}
-.fav-list{margin-top:0.5rem;background:linear-gradient(180deg,#fff,#fffaf0);padding:0.5rem;border-radius:8px;border:1px solid rgba(43,43,43,0.03);max-height:240px;overflow:auto}
+@keyframes float-slow {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -30px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+}
 
-.list{flex:1;padding:0.2rem 0.25rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1rem;align-items:start}
-.card{background:var(--card);border-radius:12px;padding:1rem 1.1rem;box-shadow:0 8px 24px var(--shadow);border:1px solid rgba(43,43,43,0.03);position:relative;transition:transform .25s,box-shadow .25s;cursor:pointer;}
-.card:hover{transform:translateY(-6px)}
-.card::before{content:'';position:absolute;left:14px;top:14px;width:40px;height:40px;border-radius:8px;background:linear-gradient(180deg,#fffaf0,#f2e6cf);box-shadow:inset 0 -2px 6px rgba(0,0,0,0.03)}
-.word{margin:0;padding-left:60px;font-size:1.12rem;font-weight:700;color:var(--accent)}
-.pos{font-weight:600;font-size:0.86rem;color:var(--muted);margin-left:8px}
-.def{margin-top:0.5rem;padding-left:60px;color:var(--text);line-height:1.55;white-space:pre-line}
-.actions{margin-top:0.8rem;padding-left:60px;display:flex;gap:0.5rem}
-.btn{border:1px solid rgba(43,43,43,0.06);background:linear-gradient(180deg,#fff,#fffaf0);padding:0.4rem 0.7rem;border-radius:8px;cursor:pointer;font-weight:600}
-.btn:hover{background:var(--accent);color:#fff;transform:translateY(-2px)}
+@keyframes float-particle {
+  0%, 100% { transform: translateY(0) translateX(0); opacity: 0.2; }
+  50% { transform: translateY(-100px) translateX(50px); opacity: 0.5; }
+}
+
+/* АНИМИРОВАННЫЙ ФОН */
+.animated-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  pointer-events: none;
+}
+
+.main-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #5D4037 0%, #8B4513 50%, #A0522D 100%);
+}
+
+.gradient-overlay {
+  position: absolute;
+  inset: 0;
+  opacity: 0.4;
+  background: linear-gradient(45deg, #5D4037 0%, #8B4513 25%, #A0522D 50%, #CD853F 75%, #8B4513 100%);
+  background-size: 400% 400%;
+  animation: gradient-flow 15s ease infinite;
+}
+
+.floating-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.25;
+  animation: float-slow 20s ease-in-out infinite;
+}
+
+.orb-1 {
+  top: 10%;
+  left: 10%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(255,248,240,0.9) 0%, rgba(255,248,240,0) 70%);
+}
+
+.orb-2 {
+  bottom: 10%;
+  right: 10%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(255,248,240,0.7) 0%, rgba(255,248,240,0) 70%);
+  animation-delay: -5s;
+}
+
+.orb-3 {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(255,248,240,0.6) 0%, rgba(255,248,240,0) 70%);
+  animation-delay: -10s;
+}
+
+.grid-pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.08;
+  background-image: 
+    linear-gradient(rgba(255, 248, 240, 0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 248, 240, 0.15) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+.floating-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: #fffaf0;
+  opacity: 0.25;
+  animation: float-particle 15s ease-in-out infinite;
+}
+
+.vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.15) 100%);
+}
+
+/* ОСНОВНЫЕ СТИЛИ */
+*{box-sizing:border-box; margin:0; padding:0;}
+body {
+  font-family:'Merriweather', Georgia, serif;
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  position: relative;
+  background: var(--bg);
+}
+
+/* Делаем контент поверх анимаций */
+.header, .container, footer {
+  position: relative;
+  z-index: 1;
+}
+
+/* ИСПРАВЛЕННЫЕ СТИЛИ ШАПКИ */
+.header {
+  background: var(--card);
+  padding: 1rem 0;
+  box-shadow: 0 2px 20px var(--shadow);
+  border-bottom: 2px solid var(--accent);
+  position: relative;
+}
+
+.header-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin: 0;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-top: 0.2rem;
+  margin: 0;
+  font-weight: 500;
+}
+
+.nav {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.nav-btn {
+  padding: 0.6rem 1.2rem;
+  border: 2px solid transparent;
+  background: linear-gradient(135deg, #fff, #f8f4f0);
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--muted);
+  transition: all 0.3s;
+  font-family: 'Merriweather', Georgia, serif;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 8px rgba(139,69,19,0.1);
+}
+
+.nav-btn.active {
+  background: linear-gradient(135deg, var(--accent), #A0522D);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(139,69,19,0.2);
+  border-color: var(--accent);
+}
+
+.nav-btn:hover:not(.active) {
+  background: linear-gradient(135deg, #f5eee6, #ede4d8);
+  color: var(--accent);
+  border-color: rgba(139,69,19,0.2);
+}
+
+/* Мобильное меню */
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: 2px solid var(--accent);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: var(--accent);
+  border-radius: 6px;
+  transition: all 0.3s;
+}
+
+.mobile-menu-btn:hover {
+  background: var(--accent);
+  color: white;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 1rem auto;
+  padding: 1rem;
+  display: flex;
+  gap: 1.25rem;
+}
+
+.sidebar {
+  width: 280px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 20px;
+  height: fit-content;
+  overflow: auto;
+  padding: 1rem;
+  background: var(--card);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px var(--shadow);
+  border: 1px solid rgba(139,69,19,0.1);
+}
+
+.search-container {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.search {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border-radius: 10px;
+  border: 2px solid rgba(139,69,19,0.2);
+  background: linear-gradient(180deg,#fff,#fffaf5);
+  font-family: 'Merriweather', Georgia, serif;
+  padding-right: 2.5rem;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+}
+
+.search:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(139,69,19,0.1);
+}
+
+.search-clear {
+  position: absolute;
+  right: 0.7rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  font-size: 1.2rem;
+  display: none;
+  transition: color 0.3s;
+}
+
+.search-clear:hover {
+  color: var(--accent);
+}
+
+.search-info {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 0.5rem;
+  text-align: center;
+  padding: 0.3rem;
+  background: rgba(139,69,19,0.05);
+  border-radius: 6px;
+  border-left: 3px solid var(--accent);
+}
+
+.letters {
+  margin-top: 0.8rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.letters button {
+  background: linear-gradient(135deg, #fff, #f8f4f0);
+  border: 1px solid rgba(139,69,19,0.2);
+  padding: 0.35rem 0.6rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--accent);
+  font-family: 'Merriweather', Georgia, serif;
+  font-size: 0.8rem;
+  transition: all 0.3s;
+}
+
+.letters button.active {
+  background: linear-gradient(135deg, var(--accent), #A0522D);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(139,69,19,0.2);
+  transform: translateY(-2px);
+}
+
+.letters button:hover:not(.active) {
+  background: linear-gradient(135deg, #f5eee6, #ede4d8);
+  transform: translateY(-1px);
+}
+
+.fav-title {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--accent);
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid rgba(139,69,19,0.1);
+}
+
+.fav-list {
+  margin-top: 0.5rem;
+  background: linear-gradient(180deg,#fff,#fffaf5);
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid rgba(139,69,19,0.1);
+  max-height: 240px;
+  overflow: auto;
+  list-style: none;
+}
+
+.fav-list li {
+  padding: 0.5rem;
+  cursor: pointer;
+  color: var(--text);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.3rem;
+  border-radius: 6px;
+  transition: all 0.3s;
+  border: 1px solid transparent;
+}
+
+.fav-list li:hover {
+  background: rgba(139,69,19,0.05);
+  border-color: rgba(139,69,19,0.1);
+}
+
+.remove-fav {
+  background: rgba(231, 76, 60, 0.1);
+  color: #e74c3c;
+  border: 1px solid rgba(231, 76, 60, 0.3);
+  cursor: pointer;
+  font-size: 0.8rem;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  transition: all 0.3s;
+}
+
+.remove-fav:hover {
+  background: #e74c3c;
+  color: white;
+}
+
+.stats {
+  margin-top: 1rem;
+  padding: 0.8rem;
+  background: linear-gradient(180deg,#fff,#fffaf5);
+  border-radius: 8px;
+  border: 1px solid rgba(139,69,19,0.1);
+  font-size: 0.85rem;
+}
+
+.stats div {
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.3rem;
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+
+.stats div:hover {
+  background: rgba(139,69,19,0.05);
+}
+
+.stats span {
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.list {
+  flex: 1;
+  padding: 0.2rem 0.25rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(320px,1fr));
+  gap: 1rem;
+  align-items: start;
+}
+
+.card {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 1rem 1.1rem;
+  box-shadow: 0 4px 20px var(--shadow);
+  border: 1px solid rgba(139,69,19,0.1);
+  position: relative;
+  transition: transform .25s,box-shadow .25s;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 30px rgba(139,69,19,0.15);
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  left: 14px;
+  top: 14px;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: linear-gradient(135deg,#fffaf0,#f2e6cf);
+  box-shadow: inset 0 -2px 6px rgba(0,0,0,0.03), 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Стили для изображений в карточках */
+.card-image {
+  width: 100%;
+  height: 160px;
+  border-radius: 8px;
+  margin-bottom: 0.8rem;
+  object-fit: contain;
+  background: linear-gradient(135deg,#f3ead7,#e8dcc3);
+}
+
+.image-placeholder {
+  width: 100%;
+  height: 120px;
+  border-radius: 8px;
+  margin-bottom: 0.8rem;
+  background: linear-gradient(135deg,#f3ead7,#e8dcc3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-size: 0.8rem;
+  border: 1px dashed rgba(139,69,19,0.3);
+}
+
+.word {
+  margin: 0;
+  padding-left: 60px;
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.pos {
+  font-weight: 600;
+  font-size: 0.86rem;
+  color: var(--muted);
+  margin-left: 8px;
+  background: rgba(139,69,19,0.1);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+}
+
+.def {
+  margin-top: 0.5rem;
+  padding-left: 60px;
+  color: var(--text);
+  line-height: 1.55;
+  white-space: pre-line;
+}
+
+.actions {
+  margin-top: 0.8rem;
+  padding-left: 60px;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn {
+  border: 2px solid rgba(139,69,19,0.1);
+  background: linear-gradient(135deg, #fff, #f8f4f0);
+  padding: 0.4rem 0.7rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-family: 'Merriweather', Georgia, serif;
+  transition: all 0.3s;
+  font-size: 0.8rem;
+  color: var(--text);
+}
+
+.btn:hover {
+  background: linear-gradient(135deg, var(--accent), #A0522D);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(139,69,19,0.2);
+}
 
 /* Стили для страницы песен */
-.songs-page{display:none;}
-.song-card{background:var(--card);border-radius:12px;padding:1.5rem;box-shadow:0 8px 24px var(--shadow);border:1px solid rgba(43,43,43,0.03);margin-bottom:1.5rem;}
-.song-title{font-size:1.3rem;font-weight:700;color:var(--accent);margin-bottom:1rem;border-bottom:2px solid var(--accent);padding-bottom:0.5rem;}
-.song-content{color:var(--text);line-height:1.8;white-space:pre-line;font-size:0.95rem;}
-.song-meta{color:var(--muted);font-size:0.85rem;margin-top:1rem;font-style:italic;}
+.songs-page {
+  display: none;
+  width: 100%;
+}
+
+.song-card {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px var(--shadow);
+  border: 1px solid rgba(139,69,19,0.1);
+  margin-bottom: 1.5rem;
+}
+
+.song-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 1rem;
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 0.5rem;
+}
+
+.song-content {
+  color: var(--text);
+  line-height: 1.8;
+  white-space: pre-line;
+  font-size: 0.95rem;
+}
+
+.song-meta {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-top: 1rem;
+  font-style: italic;
+}
 
 /* Аудио плеер */
-.audio-player{background:linear-gradient(180deg,#fffaf0,#f2e6cf);border-radius:12px;padding:1rem;margin:1rem 0;border:1px solid rgba(107,79,43,0.1);}
-.player-controls{display:flex;align-items:center;gap:1rem;margin-bottom:0.5rem;}
-.play-btn{background:var(--accent);color:white;border:none;border-radius:50%;width:40px;height:40px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.2rem;transition:all 0.3s;}
-.play-btn:hover{transform:scale(1.1);box-shadow:0 4px 12px rgba(107,79,43,0.3);}
-.progress-container{flex:1;background:rgba(107,79,43,0.1);border-radius:10px;height:6px;cursor:pointer;position:relative;}
-.progress-bar{background:var(--accent);border-radius:10px;height:100%;width:0%;transition:width 0.1s;}
-.time{display:flex;justify-content:space-between;color:var(--muted);font-size:0.8rem;}
-.volume-controls{display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;}
-.volume-icon{color:var(--muted);font-size:1rem;}
-.volume-slider{flex:1;background:rgba(107,79,43,0.1);border-radius:10px;height:4px;cursor:pointer;}
+.audio-player {
+  background: linear-gradient(180deg,#fffaf0,#f2e6cf);
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 1rem 0;
+  border: 1px solid rgba(139,69,19,0.2);
+}
 
-.header-note{text-align:center;color:var(--muted);font-size:0.9rem;margin-top:0.5rem}
+.player-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.play-btn {
+  background: linear-gradient(135deg, var(--accent), #A0522D);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  transition: all 0.3s;
+  box-shadow: 0 2px 8px rgba(139,69,19,0.2);
+}
+
+.play-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(139,69,19,0.3);
+}
+
+.progress-container {
+  flex: 1;
+  background: rgba(139,69,19,0.1);
+  border-radius: 10px;
+  height: 6px;
+  cursor: pointer;
+  position: relative;
+}
+
+.progress-bar {
+  background: linear-gradient(135deg, var(--accent), #A0522D);
+  border-radius: 10px;
+  height: 100%;
+  width: 0%;
+  transition: width 0.1s;
+}
+
+.time {
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.volume-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.volume-icon {
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+.volume-slider {
+  flex: 1;
+  background: rgba(139,69,19,0.1);
+  border-radius: 10px;
+  height: 4px;
+  cursor: pointer;
+}
+
+.header-note {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background: rgba(139,69,19,0.05);
+  border-radius: 6px;
+  border: 1px solid rgba(139,69,19,0.1);
+}
 
 /* Модальное окно */
-.modal{display:none;position:fixed;z-index:1000;left:0;top:0;width:100%;height:100%;background-color:rgba(0,0,0,0.5);backdrop-filter:blur(4px)}
-.modal-content{background:var(--card);margin:2% auto;padding:0;border-radius:16px;width:90%;max-width:600px;max-height:90vh;overflow:auto;box-shadow:0 20px 60px rgba(0,0,0,0.3);border:1px solid rgba(107,79,43,0.1)}
-.modal-header{padding:1.5rem;border-bottom:1px solid rgba(107,79,43,0.1);display:flex;justify-content:space-between;align-items:center;background:linear-gradient(180deg,#fffaf0,#f2e6cf)}
-.modal-title{font-size:1.4rem;font-weight:700;color:var(--accent);margin:0}
-.close{color:#aaa;float:right;font-size:2rem;font-weight:bold;cursor:pointer;line-height:1;transition:color .3s}
-.close:hover{color:var(--accent)}
-.modal-body{padding:1.5rem}
-.word-image{width:100%;height:200px;background:linear-gradient(135deg,#f3ead7,#e8dcc3);border-radius:12px;margin-bottom:1.5rem;display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px solid rgba(107,79,43,0.1)}
-.word-image img{width:100%;height:100%;object-fit:cover;display:none}
-.word-image .placeholder{color:var(--muted);font-size:1rem;text-align:center;padding:2rem}
-.word-info{margin-bottom:1.5rem}
-.info-row{display:flex;margin-bottom:0.8rem;padding:0.5rem;background:rgba(246,239,230,0.5);border-radius:8px}
-.info-label{font-weight:700;color:var(--accent);min-width:120px}
-.info-value{flex:1;color:var(--text)}
-.modal-actions{display:flex;gap:0.8rem;justify-content:flex-end;border-top:1px solid rgba(107,79,43,0.1);padding-top:1.5rem}
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  backdrop-filter: blur(4px);
+}
 
-@media (max-width:900px){.container{flex-direction:column}.sidebar{width:100%;position:relative;height:auto}}
-@media (max-width:600px){.modal-content{width:95%;margin:5% auto}}
+.modal-content {
+  background: var(--card);
+  margin: 2% auto;
+  padding: 0;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow: auto;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  border: 2px solid var(--accent);
+}
+
+.modal-header {
+  padding: 1.5rem;
+  border-bottom: 2px solid rgba(139,69,19,0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg,#fffaf0,#f2e6cf);
+  border-radius: 16px 16px 0 0;
+}
+
+.modal-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin: 0;
+}
+
+.close {
+  color: var(--muted);
+  float: right;
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+  line-height: 1;
+  transition: color .3s;
+}
+
+.close:hover {
+  color: var(--accent);
+}
+
+.modal-body {
+  padding: 1.5rem;
+}
+
+.word-image {
+  width: 100%;
+  height: 300px;
+  background: linear-gradient(135deg,#f3ead7,#e8dcc3);
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 2px solid rgba(139,69,19,0.2);
+}
+
+.word-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.word-image .placeholder {
+  color: var(--muted);
+  font-size: 1rem;
+  text-align: center;
+  padding: 2rem;
+}
+
+.word-info {
+  margin-bottom: 1.5rem;
+}
+
+.info-row {
+  display: flex;
+  margin-bottom: 0.8rem;
+  padding: 0.8rem;
+  background: rgba(246,239,230,0.7);
+  border-radius: 8px;
+  border: 1px solid rgba(139,69,19,0.1);
+}
+
+.info-label {
+  font-weight: 700;
+  color: var(--accent);
+  min-width: 120px;
+}
+
+.info-value {
+  flex: 1;
+  color: var(--text);
+}
+
+.modal-actions {
+  display: flex;
+  gap: 0.8rem;
+  justify-content: flex-end;
+  border-top: 2px solid rgba(139,69,19,0.2);
+  padding-top: 1.5rem;
+}
+
+/* АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ */
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    position: relative;
+    height: auto;
+  }
+  
+  .list {
+    grid-template-columns: repeat(auto-fill,minmax(280px,1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .header-content {
+    flex-wrap: wrap;
+  }
+  
+  .mobile-menu-btn {
+    display: block;
+  }
+  
+  .nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--card);
+    flex-direction: column;
+    padding: 1rem;
+    box-shadow: 0 4px 20px var(--shadow);
+    z-index: 100;
+    border-top: 2px solid var(--accent);
+  }
+  
+  .nav.active {
+    display: flex;
+  }
+  
+  .nav-btn {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  .list {
+    grid-template-columns: 1fr;
+  }
+  
+  .modal-content {
+    width: 95%;
+    margin: 10% auto;
+  }
+  
+  .header-content > div:first-child {
+    flex: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0.5rem;
+  }
+  
+  .card {
+    padding: 0.8rem;
+  }
+  
+  .word, .def {
+    padding-left: 50px;
+  }
+  
+  .card::before {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .actions {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 360px) {
+  .header-content {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  .mobile-menu-btn {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
 </style>
 </head>
 <body>
+<!-- АНИМИРОВАННЫЙ ФОН -->
+<div class="animated-background">
+  <div class="main-gradient"></div>
+  <div class="gradient-overlay"></div>
+  
+  <div class="floating-orb orb-1"></div>
+  <div class="floating-orb orb-2"></div>
+  <div class="floating-orb orb-3"></div>
+  
+  <div class="grid-pattern"></div>
+  
+  <div id="particles-container"></div>
+  
+  <div class="vignette"></div>
+</div>
+
+<!-- ШАПКА С МОБИЛЬНЫМ МЕНЮ -->
 <header class="header">
   <div class="header-content">
     <div>
       <div class="title">Электроннай тылдьыт</div>
       <div class="subtitle" id="pageSubtitle">Словарь якутского языка</div>
     </div>
-    <nav class="nav">
+    
+    <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+    
+    <nav class="nav" id="mainNav">
       <button class="nav-btn active" onclick="showPage('dictionary')">📚 Словарь</button>
       <button class="nav-btn" onclick="showPage('songs')">🎵 Песни</button>
     </nav>
@@ -106,10 +916,23 @@ body{margin:0;font-family:'Merriweather', Georgia, serif;background:linear-gradi
 <!-- Страница словаря -->
 <div id="dictionary-page" class="container">
   <aside class="sidebar">
-    <input id="search" class="search" placeholder="🔍 Поиск слова..." />
+    <div class="search-container">
+      <input id="search" class="search" placeholder="🔍 Поиск слова..." />
+      <button class="search-clear" onclick="clearSearch()">×</button>
+    </div>
+    <div class="search-info" id="searchInfo">Начните вводить слово для поиска</div>
+    
     <div class="letters" id="letters"></div>
+    
     <div class="fav-title">⭐ Избранное</div>
-    <ul class="fav-list" id="favorites"><li style="color:var(--muted)">Пока нет</li></ul>
+    <ul class="fav-list" id="favorites"><li style="color:var(--muted)">Пока нет избранных слов</li></ul>
+    
+    <div class="stats" id="stats">
+      <div>Всего слов: <span id="totalWords">0</span></div>
+      <div>В избранном: <span id="favCount">0</span></div>
+      <div>Найдено: <span id="foundCount">0</span></div>
+    </div>
+    
     <div class="header-note">Подсказка: нажмите на слово для подробной информации</div>
   </aside>
 
@@ -364,7 +1187,7 @@ body{margin:0;font-family:'Merriweather', Georgia, serif;background:linear-gradi
     <div class="modal-body">
       <div class="word-image">
         <img id="modalWordImage" src="" alt="">
-        <div class="placeholder">Изображение отсутствует</div>
+        <div class="placeholder">📷 Изображение отсутствует</div>
       </div>
       <div class="word-info">
         <div class="info-row">
@@ -379,10 +1202,6 @@ body{margin:0;font-family:'Merriweather', Georgia, serif;background:linear-gradi
           <div class="info-label">Определение:</div>
           <div class="info-value" id="modalDefinition"></div>
         </div>
-        <div class="info-row">
-          <div class="info-label">Примеры:</div>
-          <div class="info-value" id="modalExamples"></div>
-        </div>
       </div>
       <div class="modal-actions">
         <button class="btn" onclick="copyText(currentWordId)">📋 Копировать</button>
@@ -393,159 +1212,75 @@ body{margin:0;font-family:'Merriweather', Georgia, serif;background:linear-gradi
   </div>
 </div>
 
-<footer style="text-align:center;padding:1rem 0;color:var(--muted)">© 2025 «Электроннай тылдьыт» — словарь и песни</footer>
+<footer style="text-align:center;padding:1rem 0;color:var(--muted);position:relative;z-index:1">
+  © 2025 «Электроннай тылдьыт» — словарь и песни
+</footer>
 
 <script>
-// Аудио файлы (заглушки - можно заменить на реальные)
-const audioFiles = {
-  'sayynghi': 'https://drive.google.com/file/d/1U_Fuiom1W4rIOFowxANqhjgo9eH7aR97/view?usp=sharing',
-  'suollar': 'https://example.com/audio/suollar.mp3',
-  'sakha-unkuute': 'https://example.com/audio/sakha-unkuute.mp3',
-  'ferma-kyrgyttara': 'https://example.com/audio/ferma-kyrgyttara.mp3',
-  'kihiyehe-toroobyt-doydu': 'https://example.com/audio/kihiyehe-toroobyt-doydu.mp3'
-};
-
-const audioPlayers = {};
-let currentAudio = null;
-
-// Создаем аудио элементы
-Object.keys(audioFiles).forEach(songId => {
-  const audio = new Audio();
-  audio.src = audioFiles[songId];
-  audio.volume = 1;
-  
-  audio.addEventListener('loadedmetadata', () => {
-    document.getElementById(`duration-${songId}`).textContent = formatTime(audio.duration);
-  });
-  
-  audio.addEventListener('timeupdate', () => {
-    updateProgress(songId);
-  });
-  
-  audio.addEventListener('ended', () => {
-    resetPlayer(songId);
-  });
-  
-  audioPlayers[songId] = audio;
-});
-
-function togglePlay(songId) {
-  const audio = audioPlayers[songId];
-  const playBtn = document.querySelector(`#player-${songId} .play-btn`);
-  
-  if (currentAudio && currentAudio !== audio) {
-    // Останавливаем предыдущий трек
-    currentAudio.pause();
-    resetPlayer(getSongIdByAudio(currentAudio));
-  }
-  
-  if (audio.paused) {
-    audio.play();
-    playBtn.textContent = '⏸';
-    currentAudio = audio;
-  } else {
-    audio.pause();
-    playBtn.textContent = '▶';
-  }
-}
-
-function updateProgress(songId) {
-  const audio = audioPlayers[songId];
-  const progress = (audio.currentTime / audio.duration) * 100;
-  document.getElementById(`progress-${songId}`).style.width = `${progress}%`;
-  document.getElementById(`currentTime-${songId}`).textContent = formatTime(audio.currentTime);
-  document.getElementById(`time-${songId}`).textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
-}
-
-function seek(songId, event) {
-  const audio = audioPlayers[songId];
-  const progressContainer = event.currentTarget;
-  const clickX = event.offsetX;
-  const width = progressContainer.offsetWidth;
-  const seekTime = (clickX / width) * audio.duration;
-  audio.currentTime = seekTime;
-}
-
-function setVolume(songId, volume) {
-  const audio = audioPlayers[songId];
-  audio.volume = volume;
-}
-
-function resetPlayer(songId) {
-  const playBtn = document.querySelector(`#player-${songId} .play-btn`);
-  playBtn.textContent = '▶';
-  document.getElementById(`progress-${songId}`).style.width = '0%';
-  document.getElementById(`currentTime-${songId}`).textContent = '0:00';
-}
-
-function formatTime(seconds) {
-  const mins = Math.floor(seconds / 60);
-  const secs = Math.floor(seconds % 60);
-  return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
-}
-
-function getSongIdByAudio(audio) {
-  for (const [songId, audioObj] of Object.entries(audioPlayers)) {
-    if (audioObj === audio) return songId;
-  }
-  return null;
-}
-
-// Остальной код словаря
+// Обновленные данные словаря с изображениями
 const entries = [
   {
     "id": 1,
     "word": "Ача",
-    "pos": "",
-    "definition": "- аат. бурдук соломотугар маарынныыр, уһун аҕыйах сэбирдэхтээх, бөҕө силистээх кытаанах от. Пырей. Саҥа тыллар ачам салаата хамсыы-хамсыы үүнэн барар. «Саас» Алпаабыт"
+    "pos": "аат",
+    "definition": "- аат. бурдук соломотугар маарынныыр, уһун аҕыйах сэбирдэхтээх, бөҕө силистээх кытаанах от. Пырей. Саҥа тыллар ачам салаата хамсыы-хамсыы үүнэн барар. «Саас» Алпаабыт",
+    "image": "https://i.ibb.co/QjT5RgYB/1.jpg"
   },
   {
     "id": 2,
     "word": "Алаас",
     "pos": "",
-    "definition": "- аат. тыа тулалаах ыраас сир, хонуу (үксүгэр оттонор ходуһалаах, ортотугар күөллээх). Арыылаах алаас киэҥ иэнэ алтан отунан симэммит. «Ырыа» Алпаабыт [9]."
+    "definition": "- аат. тыа тулалаах ыраас сир, хонуу (үксүгэр оттонор ходуһалаах, ортотугар күөллээх). Арыылаах алаас киэҥ иэнэ алтан отунан симэммит. «Ырыа» Алпаабыт [9].",
+    "image": "https://i.ibb.co/WvFwNC97/2.jpg"
   },
   {
     "id": 3,
     "word": "Адаҕа",
     "pos": "",
-    "definition": "– аат. 1. Атаҕар кэтэрдиллэр модьу боҕуу мас. 2. Ыар баттык, харгыс, мэһэй. Атахтарын көһүйэн адаҕалаах курдуктар. (“Эйэлээх куорат”). Алпаабыт"
+    "definition": "– аат. 1. Атаҕар кэтэрдиллэр модьу боҕуу мас. 2. Ыар баттык, харгыс, мэһэй. Атахтарын көһүйэн адаҕалаах курдуктар. (“Эйэлээх куорат”). Алпаабыт",
+    "image": "https://i.ibb.co/Gf80V7Q4/3.jpg"
   },
   {
     "id": 4,
     "word": "Аллаах",
     "pos": "",
-    "definition": "- даҕ. Улгум уонна түргэн сырыылаах (көлө, массыына туһунан). Өрүү түһээн көрөбүн, арыт илэ саныыбын: онно тибии көтөрүн уонна аллаах табабын. (“Булчут ахтылҕана”). Алпаабыт"
+    "definition": "- даҕ. Улгум уонна түргэн сырыылаах (көлө, массыына туһунан). Өрүү түһээн көрөбүн, арыт илэ саныыбын: онно тибии көтөрүн уонна аллаах табабын. (“Булчут ахтылҕана”). Алпаабыт",
+    "image":"https://i.ibb.co/fVGfBHKh/4.jpg" 
   },
   {
     "id": 5,
     "word": "Алар",
     "pos": "",
-    "definition": "- аат. арыы тиит ойуур; быста-быста салҕанан барар өрүс хочотунааҕы сэндэҥэ ойуур. Мин күнү көрбүтүм, мин манна үүммүтүм – бу налыы сыһыыбар,бу чараҥ аларбар. “Өлүөнэ эбэкэм”. Алпаабыт"
+    "definition": "- аат. арыы тиит ойуур; быста-быста салҕанан барар өрүс хочотунааҕы сэндэҥэ ойуур. Мин күнү көрбүтүм, мин манна үүммүтүм – бу налыы сыһыыбар,бу чараҥ аларбар. “Өлүөнэ эбэкэм”. Алпаабыт",
+    "image": "https://i.ibb.co/Y7Lb0yMD/5.jpg"
   },
   {
     "id": 6,
     "word": "Алаһа",
     "pos": "",
-    "definition": "- аат. Төрөөбүт-үөскээбит дьиэ-уот. Төрөөбүт чысхааннаах алаһам. !.. «Кыһыннаах кыраайбар». Алпаабыт [24, с. 12]."
+    "definition": "- аат. Төрөөбүт-үөскээбит дьиэ-уот. Төрөөбүт чысхааннаах алаһам. !.. «Кыһыннаах кыраайбар». Алпаабыт [24, с. 12].",
+    "image": "https://i.ibb.co/4RtnV30Z/6.jpg"
   },
   {
     "id": 7,
     "word": "Алтан от",
     "pos": "",
-    "definition": "- аат. дьааттаах симэһиннээх араҕас сибэккилээх от. Лютик. Арыылаах алаас киэҥ иэнэ алтан отунан симэммит. «Ырыа». Алпаабыт"
+    "definition": "- аат. дьааттаах симэһиннээх араҕас сибэккилээх от. Лютик. Арыылаах алаас киэҥ иэнэ алтан отунан симэммит. «Ырыа». Алпаабыт",
+    "image": "https://i.ibb.co/5WgQ38X7/7.jpg"
   },
   {
     "id": 8,
     "word": "Амынньыар",
     "pos": "",
-    "definition": "– аат . Мас синньигэс лабаата, мутуга. Ол тыаҕа мин көрдүөм долгуйа оҕо сааһым сүүс бэлиэтин: отоннуур, амынньыар хомуйар умнубат кэриэс сирдэрбин. (“Ахтылҕан”). Алпаабыт"
+    "definition": "– аат . Мас синньигэс лабаата, мутуга. Ол тыаҕа мин көрдүөм долгуйа оҕо сааһым сүүс бэлиэтин: отоннуур, амынньыар хомуйар умнубат кэриэс сирдэрбин. (“Ахтылҕан”). Алпаабыт",
+    "image": "https://i.ibb.co/Z1Ls49RN/8.jpg" 
   },
   {
     "id": 9,
     "word": "Аҥааттар",
     "pos": "",
-    "definition": "– даҕ. поэт. Киэҥ сиринэн тайаан сытар. Занимающий общирное пространство. Аттыбытыгар Арыылаах алааска, аҥааттар айан суолун айаҕар, олорбуттара сүдү уорукка оройколор диэн ааттаах баайдар. (“Комсомол төлөөннөөх сүрэҕэ” ). Алпаабыт"
+    "definition": "– даҕ. поэт. Киэҥ сиринэн тайаан сытар. Занимающий общирное пространство. Аттыбытыгар Арыылаах алааска, аҥааттар айан суолун айаҕар, олорбуттара сүдү уорукка оройколор диэн ааттаах баайдар. (“Комсомол төлөөннөөх сүрэҕэ” ). Алпаабыт",
+    "image": ""
   },
   {
     "id": 10,
@@ -728,470 +1463,470 @@ const entries = [
     "definition": "- аат. Отун  - маһын уот сиэбит сыгынньах сирэйдээх хайа, мыраан. Онно кыртас хайалар,сааскы дохсун халааттар. (“Булчут ахтылҕана”). Алпаабыт"
   },
   {
-    "id": 59,
+    "id": 40,
     "word": "Кытыт сылгы",
     "pos": "",
     "definition": "- аат. иккилээх-үстээх тыһы сылгы. Кытыт сылгы кымыһа кырылаччы кутуллар,субай, харта сокууска сойон, тупсан тураллар. “Ыһыахха ыҥырыы”. Алпаабыт"
   },
   {
-    "id": 60,
+    "id": 41,
     "word": "Кэнчээри",
     "pos": "",
     "definition": "- аат. ото охсуллубут сиргэ иккистээн үүммүт саҥа от. Алаас аһыллан ынахтар маҕырастылар,амтаннаах кэнчээри сыта тунуйар. “Күһүн”. Алпаабыт"
   },
   {
-    "id": 61,
+    "id": 42,
     "word": "Кэрэмэс саһыл",
     "pos": "",
     "definition": "- аат. кырымахтаах хара уонна кыһыл саһыл булкаастара (түүтүн кылаана көҕөркөй эбэтэр сырдык толбоонноох кыһыллыҥы бороҥ дьүһүннээх). Сиинэ кэрэмэс саһылын бочугураһа дуу диэбитим, долгуйар уһун суһуоҕун толбоннурара эбит дии. «Ырыа». Алпаабыт"
   },
   {
-    "id": 62,
+    "id": 43,
     "word": "Маҥкы",
     "pos": "",
     "definition": "– аат. Куйуур ураҕаһа, эргитэр маһа. Өлүөнэ сааскы иччитэх арыылара сэргииллэр, эҥин маҥкылаах, бэрэппиллээх дурдалар иһийэллэр. (“Булка”). Алпаабыт [3, с. 35]."
   },
   {
-    "id": 63,
+    "id": 44,
     "word": "Маар",
     "pos": "",
     "definition": "– аат. Тыа ортотугар уулаах, бадарааннаах, ыарҕалаах, муохтаах сир. Толоон, тыа, маар – барыта кэҥээбиккэ дылы дуу? («Күһүн»). Алпаабыт"
   },
   {
-    "id": 64,
+    "id": 45,
     "word": "Маҥхааһай",
     "pos": "",
     "definition": "– бурдук кутар ыскылаат; бурдугу туттарар пуун, улахан ыскылаат. Маҥхааһай таһыгар бурдук астыыллар, Уйбаан эһиилги сонуогу хорутар. “Күһүн”. Алпаабыт"
   },
   {
-    "id": 65,
+    "id": 46,
     "word": "Мороду",
     "pos": "",
     "definition": "– аат. Үрүт – үрдүгэр «урут-урут» диэн саҥалаах чөркөөкүттэн эрэ улахан кураанах кус (нууч. Чирок-клоктун). Дьону кыһытан талахха үөр мороду моргуйар, эбэтэр арыы кумахха хаас саҥата лыгыйар. (“Булка”). Алпаабыт [1, с. 87]."
   },
   {
-    "id": 66,
+    "id": 47,
     "word": "Моргуй",
     "pos": "",
     "definition": "– тыаһы үтүктэр туохтуур. Улаханнык, дьаныардаахтык үр. Дьону кыһытан талахха үөр мороду моргуйар, эбэтэр арыы кумахха хаас саҥата лыгыйар. (“Булка”). Алпаабыт"
   },
   {
-    "id": 67,
+    "id": 48,
     "word": "Мохсоҕол",
     "pos": "",
     "definition": "– аат. Куһу тэбэн сиир тыҥырахтаах көтөр (нууч. Сокол-сапсан). Ол туран мин толло сэргиирим мохсоҕол чаҥыргыыр саҥатын. (“Эйэлээх куорат”). Алпаабыт [1, с. 97]."
   },
   {
-    "id": 68,
+    "id": 49,
     "word": "Мыраан",
     "pos": "",
     "definition": "– өрүс, үрэх эҥэрин кыйа барар намыһах хайа. Доҕоруом, дабай күөх сыырдаргын, мырааҥҥа көрүс күн тахсыытын. («Доҕоруом, дабай күөх сыырдаргын»). Алпаабыт"
   },
   {
-    "id": 69,
+    "id": 50,
     "word": "Нүөл",
     "pos": "",
     "definition": "– даҕ. Сииктээх, курааннаабат буолан, үүнүүлээх, өҥ. Кини бэйэлээх нүөл да нүөл быйаҥнаах кытыллара, сигири курдук симэнэн, ситэн сыталлар. (“Бүлүү биэрэгэр”). Алпаабыт"
   },
   {
-    "id": 70,
+    "id": 51,
     "word": "Номоҕон",
     "pos": "",
     "definition": "– даҕ. Намыын, көрсүө майгылаах. ...Кырдьар сааспар мин маннык холку, намыын буолларбын. Саллар сааспын туоламмын номоҕоннук сыттарбын! («Күһүн»). Алпаабыт Андрей Чикачев"
   },
   {
-    "id": 71,
+    "id": 52,
     "word": "Ньуоҕу",
     "pos": "",
     "definition": "- аат. Табаны сыарҕаҕа олорон иһэн салайар уһун быа. Чуорааннаах табабын ньуоҕулаан,тоҥууну тыырдаран ааһабын. «Кыһыннаах кыраайбар». Алпаабыт"
   },
   {
-    "id": 72,
+    "id": 53,
     "word": "Ньуур",
     "pos": "",
     "definition": "– аат. Туох эмэ хаптаччы көстөр иэнэ, сирэйэ. Туундара ньуурун сууйар, ыраастыыр. “Туундараҕа”. Алпаабыт"
   },
   {
-    "id": 73,
+    "id": 54,
     "word": "Ньыгыл",
     "pos": "",
     "definition": "– даҕ. Туох да дьиэгэ суох биир кэлим тыйыс, кытаанах оҥоһуулаах. Ньыгыл таас диэн тардыммакка,тоҥ буор диэн толло барбакка, буур массыына аппаҕа курулуур. (“Эйэлээх куорат”). Алпаабыт"
   },
   {
-    "id": 74,
+    "id": 55,
     "word": "Омурҕан",
     "pos": "",
     "definition": "- аат. Сиргэ сылдьан (хол., окко) аһыыр уонна сынньанар кэм, тохтобул. Омурҕаҥҥа тахсан иһэн уол оҕо миигин ситтэ. «Уой, оҕолоор, истиҥ эрэ». Алпаабыт"
   },
   {
-    "id": 75,
+    "id": 56,
     "word": "Олом",
     "pos": "",
     "definition": "– аат. Дириҥ ууну (хол., үрэҕи) кэһэн туоруур чычаас сир. Үрэххэ, чүөмпэлээх оломҥо дьулуспат бэйэлээх баар этим. (“Үрэххэ, чүөмпэлээх оломҥо”). Алпаабыт"
   },
   {
-    "id": 76,
+    "id": 57,
     "word": "Саарба",
     "pos": "",
     "definition": "– аат. Күндү түүлээх, сиэмэх дьоҕус тыа кыыла; киис (нууч. Соболь). Саһыл, саарба арааһын сааһылыырын сөҕөллөр. “Бобо тутар оҕонньор”. Алпаабыт [1, с. 163]."
   },
   {
-    "id": 77,
+    "id": 58,
     "word": "Сарыал",
     "pos": "",
     "definition": "– аат.  Күн сарсыардааҥҥи, киэһээҥҥи сардаҥалара, сарсыарда тахсалларыгар уонна киэһэ киирэригэр тыгар кытархай уот. Бу тыллар буолбатах – сарыаллар. («Бу тыллар буолбатах – кубалар»). Алпаабыт"
   },
   {
-    "id": 78,
+    "id": 59,
     "word": "Сигири",
     "pos": "",
     "definition": "– аат. Талах сутукатын тас эттэри мачаалка буолар курдук кыһыллыбыта. \nСутука - аат. Талах, иирэ хастанар хаҕа, хатырыга. \nКини бэйэлээх нүөл да нүөл быйаҥнаах кытыллара, сигири курдук симэнэн, ситэн сыталлар. (“Бүлүү биэрэгэр”). Алпаабыт"
   },
   {
-    "id": 79,
+    "id": 60,
     "word": "Сиксик",
     "pos": "",
     "definition": "– аат. туох эмэ алын өттө, түгэҕэ ойоҕоһун кытта холбоһор ыпсыыта эбэтэр алын кытыыта. Булт сойуотугар кини  сир сиксигэр тиийэр. «Булчут». Алпаабыт Николай Марфусалов."
   },
   {
-    "id": 80,
+    "id": 61,
     "word": "Силбик",
     "pos": "",
     "definition": "- аат. Ардах уонна ардахтан от-мас инчэҕэйэ. Биитэр үүммүт сыһыынан силбиктээх оту кэһэн. (“Булчут ахтылҕана”). Алпаабыт"
   },
   {
-    "id": 81,
+    "id": 62,
     "word": "Симилэх",
     "pos": "",
     "definition": "– аат. Симэн кэбиспит курдук хойуутук үүммүт кыра мастаах эбэтэр талахтаах сииктээх намыһах сир. Кистэлэҥ симилэх сыбарга кирийбит куобахтар тоҥмоттор. «Кыһыннаах кыраайбар». Алпаабыт"
   },
   {
-    "id": 82,
+    "id": 63,
     "word": "Сойуо",
     "pos": "",
     "definition": "- аат. булду эккирэтии, батыһыы. Сур бөрөнү сойуолуур,токоҕо саарбалыыр. «Булчут». Алпаабыт [24, с. 69]."
   },
   {
-    "id": 83,
+    "id": 64,
     "word": "Сойуолаа",
     "pos": "",
     "definition": "- т. кыылы эбэтэр киһини ситэн өлөрөөрү эбэтэр тутаары кэнниттэн батыһан эккирэт. Сур бөрөнү сойуолуур,токоҕо саарбалыыр. «Булчут». Алпаабыт Коля Иннокентьев «Кыраһа суруга»\n [10, с. 19]."
   },
   {
-    "id": 84,
+    "id": 65,
     "word": "Сонуок",
     "pos": "",
     "definition": "– бурдук ыһар сир, бааһына. Маҥхааһай таһыгар бурдук астыыллар, Уйбаан эһиилги сонуогу хорутар. “Күһүн”. Алпаабыт"
   },
   {
-    "id": 85,
+    "id": 66,
     "word": "Субай",
     "pos": "",
     "definition": "– сылгы хаанын иһиккэ туруордахха үөһэ чэҥкийэн тахсар өһөҕө суох ырааһа; сылгы оннук ыраас хаанын оһоҕоһугар кутан буһарыллыбыта. Кытыт сылгы кымыһа кырылаччы кутуллар,субай, харта сокууска сойон, тупсан тураллар. “Ыһыахха ыҥырыы”. Алпаабыт"
   },
   {
-    "id": 86,
+    "id": 67,
     "word": "Суорумньу",
     "pos": "",
     "definition": "– аат. (эргэр.) Урут уол бэйэтин эбэтэр дьонун ааттарыттан кыыстаах ыалга кэлэн уолга кэргэн кэпсэтэр киһи. Эһиги ырыаһыккыт – мин – баҕарабын былыргылыы суорумньулуу барыахпын, үчүгэй дьоҥҥо бу истиҥ ырыабын дьоллоро чугаһын быһаарыахпын. (“Сайын”). Алпаабыт [24, с. 17]"
   },
   {
-    "id": 87,
+    "id": 68,
     "word": "Сүллэр",
     "pos": "",
     "definition": "– даҕ. (поэт). Уохтаах, дохсун. Онно эппиттэр сүллэр этиҥнэр онон ааспыттар иэрийэр силлиэлэр. (“Комсомол төлөөннөөх сүрэҕэ” ). Алпаабыт"
   },
   {
-    "id": 88,
+    "id": 69,
     "word": "Суос",
     "pos": "",
     "definition": "– көсп. Туох эмэ киһиэхэ дьулаана, куттала. Эһэ, бөрө кыыллардаах түҥкэтэх суостаах ыырдар. (“Булчут ахтылҕана”). Алпаабыт"
   },
   {
-    "id": 89,
+    "id": 70,
     "word": "Сыбар",
     "pos": "",
     "definition": "- аат. Наһаа лааҥкылаах, киһи сатаан сылдьыбат иһирик ойуура. Кистэлэҥ симилэх сыбарга кирийбит куобахтар тоҥмоттор. «Кыһыннаах кыраайбар». Алпаабыт"
   },
   {
-    "id": 90,
+    "id": 71,
     "word": "Сыарҕа",
     "pos": "",
     "definition": "– аат. Айанныырга, таһаҕаһы таһарга аналлаах икки сыҥаахтаах көлүнэр тэрил. Түргэн сыарҕаҕа бухатыыр буолбатах, - ыттары тиэтэтэр кыыс оҕо саҥата. “Туундараҕа”. Алпаабыт Запряженный бык.\n[24, с. 17]."
   },
   {
-    "id": 91,
+    "id": 72,
     "word": "Сыһыы",
     "pos": "",
     "definition": "– От үүнэр сииктээх киэҥ хонуу сир. Саһыл сыһыыларга сайаҕас тыаллыын сааскы ыһыы күрэҕэ турда. «Саас». Алпаабыт"
   },
   {
-    "id": 92,
+    "id": 73,
     "word": "Сэлэ",
     "pos": "",
     "definition": "–  аат. ыһыах түһүлгэтин тула кэккэлэччи анньыллыбыт чэчир. Сибэккинэн симээммит, сэлэ чэчир астыбыт, үрүҥ астаах сир иһит түһүлгэтин тартыбыт. “Ыһыахха ыҥырыы”. Алпаабыт"
   },
   {
-    "id": 93,
+    "id": 74,
     "word": "Токоо",
     "pos": "",
     "definition": "- аат. туһаҕы тэптииргэ холбуу баайар тордуохтаах кыра мас. Сур бөрөнү сойуолуур,токоҕо саарбалыыр. «Булчут». Алпаабыт"
   },
   {
-    "id": 94,
+    "id": 75,
     "word": "Толоон",
     "pos": "",
     "definition": "– аат. Киэҥ, нэлэмэн сир, сыһыы. Толоон, тыа, маар – барыта кэҥээбиккэ дылы дуу? («Күһүн»). Алпаабыт"
   },
   {
-    "id": 95,
+    "id": 76,
     "word": "Тоҥкуруун",
     "pos": "",
     "definition": "– даҕ. Дьону кытта билсэ-көрсө, кэпсэтэ сатаабат, көһүүн, эйэҕэһе суох. Доҕоччугуом, тоҕо маннык тоҥкурууннук  көрсөн, туохтан дууһаҥ туоххаһыйан чоҕулуччу көрдүн?.. («Доҕоччугуом, тоҕо маннык?..»). Алпаабыт Екатерина Семенова – Хотун Ылдьаана"
   },
   {
-    "id": 96,
+    "id": 77,
     "word": "Торбос ыстаан",
     "pos": "",
     "definition": "– даҕ. суолт. Торбос тириититтэн оҥоһуллубут, тигиллибит. Оттон биһиги кулун сонноох, уларыйбат торбос ыстааннаах, сайын от үлэтигэр буһарбыт, кыһын ынах уулатан тоҥорбут. (“Комсомол төлөөннөөх сүрэҕэ” ). Алпаабыт [24, с. 30]."
   },
   {
-    "id": 97,
+    "id": 78,
     "word": "Тордох",
     "pos": "",
     "definition": "былыргыга ыыһаммыт сарыынан бүрүллүбүт, оттон билигин көннөрү тирии бүрүөлээх ураһа (хол., хотугу табаһыттарга). Кумах куйаарга чокуур тооромоһо сүтэрин курдук, киэҥ туундараҕа соҕотох турар тордох ураһаҕа?! “Туундараҕа”. Алпаабыт [24, с. 30]."
   },
   {
-    "id": 98,
+    "id": 79,
     "word": "Тооромос",
     "pos": "",
     "definition": "– аат. (кэпс.) Туохтан эмэ кыратык тосту тутан ылыллыбыт эбэтэр ойдон тостубута, тоороммута. Кумах куйаарга чокуур тооромоһо сүтэрин курдук, киэҥ туундараҕа соҕотох турар тордох ураһаҕа?! “Туундараҕа”. Алпаабыт"
   },
   {
-    "id": 99,
+    "id": 80,
     "word": "Төргүү мутук",
     "pos": "",
     "definition": "- аат. тиит алларааҥҥы ордук уһун лабаата. Көҥүскэ, тиит төргүү мутугар күөх тииҥнэр ичигэс дьиэлээхтэр. «Кыһыннаах кыраайбар». Алпаабыт"
   },
   {
-    "id": 100,
+    "id": 81,
     "word": "Туҥат",
     "pos": "",
     "definition": "- аат. Саҕахха кыратык көстөр сырдык сардаҥата (Проблески лучей солнца на горизонте). Онно улуу тайҕалар, уһуга суох туҥаттар... (“Булчут ахтылҕана”). Алпаабыт"
   },
   {
-    "id": 101,
+    "id": 82,
     "word": "Тумул",
     "pos": "",
     "definition": "- аат. Тыаттан сыһыыга эбэтэр сыһыыттан ууга чорбоччу үтэн киирбит сир. Мин бүгүн эйигин көрөөтүн өйдөөтүм ол ыраах сыллары: мааттаҕа ньургуһун үүммүтүн, эбэҕэ мутукча тылларын, тумулга кэҕэ чуор үөрүүтүн. (“Мин бүгүн эйигин көрөөтүн”). Алпаабыт"
   },
   {
-    "id": 102,
+    "id": 83,
     "word": "Туллук",
     "pos": "",
     "definition": "– Саас, күһүн кэлэн ааһар, кынатын төбөтүгэр харалардаах чубугурас саҥалаах үрүҥ чыычаах. Пуночка. Тумара үрүҥ туллуга чуоҕустаҕа дуу диэбитим, кэчигир чараҥ тиистэриҥ мичилийбиттэр эбит дии. «Саас». Алпаабыт"
   },
   {
-    "id": 103,
+    "id": 84,
     "word": "Тумара",
     "pos": "",
     "definition": "– аат.  тайҕа ортотугар талахтаах киэҥ сир. Тумара үрүҥ туллуга чуоҕустаҕа дуу диэбитим, кэчигир чараҥ тиистэриҥ мичилийбиттэр эбит дии. «Саас». Алпаабыт Хоһоон"
   },
   {
-    "id": 104,
+    "id": 85,
     "word": "Тумат",
     "pos": "",
     "definition": "– Омуга, төрүтэ биллибэт былыр сахалары кытта холбоспут олус сэрииһит биис ууһа. Тумат кырсатын уорҕата туналыйдаҕа диэбитим,туус-маҥан туман былаатын туртас гыммыт эбит дии. «Ырыа». Алпаабыт Афанасий Осипов. Добытчик."
   },
   {
-    "id": 105,
+    "id": 86,
     "word": "Турку",
     "pos": "",
     "definition": "– аат. Кыра чэпчэки сыарҕа, таба сыарҕата. Өр да буолла дьыбардаах сааскы киэһэ уу-чуумпу туркум суолун муҥурдаан, автоҕа олорбутум. (“Булчут ахтылҕана”). Алпаабыт [24, с. 65]."
   },
   {
-    "id": 106,
+    "id": 87,
     "word": "Түһүлгэ",
     "pos": "",
     "definition": "– аат. Дьон мустан тугу эмэ тэрийэн ыытар сирдэрэ. Сибэккинэн симээммит, сэлэ чэчир астыбыт, үрүҥ астаах сир иһит түһүлгэтин тартыбыт. “Ыһыахха ыҥырыы”. Алпаабыт [25, с. 34]."
   },
   {
-    "id": 107,
+    "id": 88,
     "word": "Тымтык",
     "pos": "",
     "definition": "– аат. Урут уматан чүмэчи кэриэтэ сырдатынарга, оттон билигин уот күөдьүтүүтүгэр эбэтэр атыҥҥа туттуллар кэтит, чараас гына тыырыллыбыт мас тырыыҥката. Биитэр тымтыгы өрбөххө суулаан, хокуукка диэн ааттаан, кэргэн оҥорон, дьиэ дьиэлэтэн: тыалыы быһыынан. (“Комсомол төлөөннөөх сүрэҕэ” ). Алпаабыт"
   },
   {
-    "id": 108,
+    "id": 89,
     "word": "Титиик",
     "pos": "",
     "definition": "- аат. сүөһүгэ аһаҕас ойоҕостордоох сайыҥҥы хотон, хахха. Үрдүк түннүктээх титииккэ ынахтар кэбинэллэр; «Ыам». Алпаабыт"
   },
   {
-    "id": 109,
+    "id": 90,
     "word": "Тыҥ",
     "pos": "",
     "definition": "– аат. Сарсыарда халлаан кырыыта саҥа сырдаан арыллыыта, саҕахха саҥа көстөн эрэр сырдык. Батыйа кылаанын курдук, кыл тыҥ быстыахча быстыбат, киэһээҥҥи сарыалы килбик сарсыардааҥҥи тыҥ солбуйар. (“Үрүҥ түүн”). Алпаабыт"
   },
   {
-    "id": 110,
+    "id": 91,
     "word": "Тыымпы",
     "pos": "",
     "definition": "– аат. Кытылыгар сыһыыта-хонуута суох маһын саҕатыттан уулаах күөл. Арбай бастаах атыыр абааһы ааҥнаан ыалы алдьаппыта, ким тыымпыта, ким алааһа, ким ходуһата хаалбыта. (“Комсомол төлөөннөөх сүрэҕэ” ). Алпаабыт"
   },
   {
-    "id": 111,
+    "id": 92,
     "word": "Улар",
     "pos": "",
     "definition": "– Дабыдалыгар уонна кутуругун үөһээ өттүнэн эрэ үрүҥ куорсуннардаах хара дьүһүннээх, кыһыл хаастаах улахан мас көтөрө (нууч.глухарь). Бурдук сириттэн улардар көттүлэр. “Күһүн”. Алпаабыт [1, с. 100]."
   },
   {
-    "id": 112,
+    "id": 93,
     "word": "Улаҕа",
     "pos": "",
     "definition": "– аат. Туох эмэ кэтэх өттө, кэннэ.  Улуу дойдум улаҕаларыттан ол дьон манна мустубуттар. (“Эйэлээх куорат”). Алпаабыт"
   },
   {
-    "id": 113,
+    "id": 94,
     "word": "Уорҕа",
     "pos": "",
     "definition": "- Сүөһү, кыыл тириитин көҕүс көп түүлээх, халыҥ өттө. Тумат кырсатын уорҕата туналыйдаҕа диэбитим, туус-маҥан туман былаатын туртас гыммыт эбит дии. «Ырыа». Алпаабыт"
   },
   {
-    "id": 114,
+    "id": 95,
     "word": "Уорук",
     "pos": "",
     "definition": "– аат. Улахан хостордоох үчүгэй тэриллээх дьиэ. Аттыбытыгар Арыылаах алааска, аҥааттар айан суолун айаҕар, олорбуттара сүдү уорукка оройколор диэн ааттаах баайдар. (“Комсомол төлөөннөөх сүрэҕэ” ). Алпаабыт"
   },
   {
-    "id": 115,
+    "id": 96,
     "word": "Ураһа",
     "pos": "",
     "definition": "– аат. Көс олохтоох дьон көтүрэн көһөрө сылдьар тирии бүрүөлээх, үөһээ өттө суптугур быһыылаах дьиэлэрэ. Кумах куйаарга чокуур тооромоһо сүтэрин курдук, киэҥ туундараҕа соҕотох турар тордох ураһаҕа?! “Туундараҕа”. Алпаабыт"
   },
   {
-    "id": 116,
+    "id": 97,
     "word": "Хапсаҕай",
     "pos": "",
     "definition": "– даҕ. Сымса, түргэн хамсаныылаах, туттунуулаах. Хапсаҕайбар хараҥаран харыаста сылдьар үһү, уран ньуурбар умсугуйан утуйбат буолбут үһү. «Уой, оҕолоор, истиҥ эрэ». Алпаабыт"
   },
   {
-    "id": 117,
+    "id": 98,
     "word": "Халадаай",
     "pos": "",
     "definition": "- даҕ. Түөһүттэн ыла туспа быһыллан кэҥээн түһэр гына тигиллибит ырбаахы. Халадаайдаах былааччыйа, хаарыс харсыат кэппиттэр. («Ферма кыргыттара»). Алпаабыт"
   },
   {
-    "id": 118,
+    "id": 99,
     "word": "Хадьымал",
     "pos": "",
     "definition": "– аат. Охсуллан, оттонон эрэр сир, оттоно сылдьар ходуһа. Ходуһаҕа, хадьымал саҕатыгар от мунньа сылдьар намыын Биэрэ. (“Сайын”). Алпаабыт"
   },
   {
-    "id": 119,
+    "id": 100,
     "word": "Хапчаан",
     "pos": "",
     "definition": "– аат. Хайа быыһа, хайаҕа уу хаспыт куоллаҕайа, аппата. Хайалар, буор хапчааннар, харылас таас харгылар... (“Эйэлээх куорат”). Алпаабыт"
   },
   {
-    "id": 120,
+    "id": 101,
     "word": "Хампа",
     "pos": "",
     "definition": "- чаҕылхай, чээлэй күөх. Хатыҥ хампа сэбирдэҕин халыҥ суорҕан гынаннар, кыра, кыра чыычаахтар хонор-сүтэр этилэр. “Хатыҥ” Алпаабыт [9]."
   },
   {
-    "id": 121,
+    "id": 102,
     "word": "Хараҥаччы",
     "pos": "",
     "definition": "– аат. Уһун кыптыыйдыы кынаттаах, түргэнник көтөр түөһүгэр маҥаннаах кыра хара чыычаах (нууч. Ласточка, стриж). Хараҥаччы көтөр курдук, халаахтаан ыраах саа тыаһа утуктуу нуктуур дойдум уу-чуумпутун аймаан ааһар. Алпаабыт"
   },
   {
-    "id": 122,
+    "id": 103,
     "word": "Харгы",
     "pos": "",
     "definition": "- аат. Өрүс, үрэх чычаарар сирэ (түгэҕэр тааһа элбэх сиринэн). Хайалар, буор хапчааннар, харылас таас харгылар... (“Эйэлээх куорат”). Алпаабыт"
   },
   {
-    "id": 123,
+    "id": 104,
     "word": "Харта",
     "pos": "",
     "definition": "– сылгы суон оһоҕоһо; ону буһаран астаммыта (сахаҕа күндү аһылыкка киирсэр). Кытыт сылгы кымыһа кырылаччы кутуллар,субай, харта сокууска сойон, тупсан тураллар. “Ыһыахха ыҥырыы”. Алпаабыт"
   },
   {
-    "id": 124,
+    "id": 105,
     "word": "Хары",
     "pos": "",
     "definition": "– аат. Киһи илиитигэр бэгэччэгиттэн тоҕоноҕор, оттон сүөһү, кыыл илин атаҕын тобугуттан бүлгүнүгэр диэритэ. Харыларын ньыппарынан, эдэр дьоннор сааһы көрсүһэ салайдылар «Саас». Алпаабыт [3, с. 8]."
   },
   {
-    "id": 125,
+    "id": 106,
     "word": "Хахсаат",
     "pos": "",
     "definition": "– аат. Сааскы былыттаах, тыаллаах тымныы күн, сааскы тымныы тыал. Хахсаат, хаһыҥ, хаар, тымныы сурахтара да суохтар. «Күөх кыраайга олорон». Алпаабыт"
   },
   {
-    "id": 126,
+    "id": 107,
     "word": "Хахыйах",
     "pos": "",
     "definition": "– үүнэн ситэ илик кыра хатыҥ. Ыйдаҥаҕа хахыйахтар, улааппыкка дылы,нуктуу, чуумпу налыйбыттар, мөһүүрэнэн сырдыы. “Киэһээ тыаҕа”. Алпаабыт"
   },
   {
-    "id": 127,
+    "id": 108,
     "word": "Чагда",
     "pos": "",
     "definition": "– аат. бэстээх ойуур. Онно күннээх саһыллаах,саарбалаах чагда тыалар. (“Булчут ахтылҕана”). Алпаабыт"
   },
   {
-    "id": 128,
+    "id": 109,
     "word": "Чаллах бэс",
     "pos": "",
     "definition": "– аһаҕас, халдьаайы сиргэ үүнэр хойуу мутуктаах, намыһах мас. Үүммүт эбиттэр бу чаллах бэстэр, бу хотун хатыҥнар, бу хойуу үөттэр («Миигин дойдутун ахтыбатын диэннэр»). Алпаабыт"
   },
   {
-    "id": 129,
+    "id": 110,
     "word": "Чокуур",
     "pos": "",
     "definition": "– аат. Былыр хататынан саҕан уот ыларга эбэтэр сааны эһэргэ туттуллар дьэҥкирдиҥи кытаанах таас, эстэриик. Кумах куйаарга чокуур тооромоһо сүтэрин курдук, киэҥ туундараҕа соҕотох турар тордох ураһаҕа?! (“Туундараҕа”). Алпаабыт"
   },
   {
-    "id": 130,
+    "id": 111,
     "word": "Чохоон",
     "pos": "",
     "definition": "– аат. Сиикэй арыыга сылаас үүтү кутан ытыйан оҥорон баран тоҥорон сиэниллэр үрүҥ ас. Тоһутуу лэппиэскэ, тойуу чохоон –  аан дойду амтаннаах астара, даба ырбаахы, хомулуок ыстаан - кыахтаахтар эрэ таҥастара. (“Комсомол төлөөннөөх сүрэҕэ” ). Алпаабыт"
   },
   {
-    "id": 131,
+    "id": 112,
     "word": "Чүөмпэ",
     "pos": "",
     "definition": "– аат. Күөл, өрүс, үрэх ордук дириҥ уута, улаханнык дириҥиир сирэ. Үрэххэ, чүөмпэлээх оломҥо дьулуспат бэйэлээх баар этим. (“Үрэххэ, чүөмпэлээх оломҥо”). Алпаабыт"
   },
   {
-    "id": 132,
+    "id": 113,
     "word": "Ыыр",
     "pos": "",
-    "definition": "– көспүт суолта (тыл көспүт суолтата) киһи олохсуйбут сирэ, дойдута. Төрөөбүт ыырбыттан тэйэн,арахсан аттанар суолбар. «Ийэ дойдум». Алпаабыт"
+    "definition": "– аат. көспүт суолта (тыл көспүт суолтата) киһи олохсуйбут сирэ, дойдута. Төрөөбүт ыырбыттан тэйэн,арахсан аттанар суолбар. «Ийэ дойдум». Алпаабыт"
   },
   {
-    "id": 133,
+    "id": 114,
     "word": "Ындыы",
     "pos": "",
     "definition": "– аат. Ат көлө ыҥыырыгар ууруллар, ыҥырдыллар таһаҕас. Бадарааммыт бараммат, кумаар, куйаас да муҥнуур. Ындыылаах таба хаампат, ылах-чылах чугуҥнуур. (“Эйэлээх куорат”). Алпаабыт"
   },
   {
-    "id": 134,
+    "id": 115,
     "word": "Ыаҕас",
     "pos": "",
     "definition": "– аат.  солуурдуу быһылаах туос иһит. Араҕас илгэнэн туолан турдулар оһуордаах ыаҕастар. «Ыам». Алпаабыт [24, с. 73]."
   },
   {
-    "id": 135,
+    "id": 116,
     "word": "Ылааҥ",
     "pos": "",
-    "definition": "– теплота от солнца. Бу тыллар буолбатах – сарыаллар. Кыраман сааскы күөх саҕахпар сандаарар ылааҥы сарыаллар. («Бу тыллар буолбатах – кубалар»). Алпаабыт"
+    "definition": "– аат. теплота от солнца. Бу тыллар буолбатах – сарыаллар. Кыраман сааскы күөх саҕахпар сандаарар ылааҥы сарыаллар. («Бу тыллар буолбатах – кубалар»). Алпаабыт"
   },
 ];
 
-let favorites = new Set();
+let favorites = new Set(JSON.parse(localStorage.getItem('dictionaryFavorites')) || []);
 let activeLetter = null;
 let currentWordId = null;
 let currentPage = 'dictionary';
@@ -1199,40 +1934,107 @@ let currentPage = 'dictionary';
 const lettersEl = document.getElementById('letters');
 const listEl = document.getElementById('list');
 const searchEl = document.getElementById('search');
+const searchClearEl = document.querySelector('.search-clear');
+const searchInfoEl = document.getElementById('searchInfo');
 const favEl = document.getElementById('favorites');
 const modal = document.getElementById('wordModal');
 const closeBtn = document.querySelector('.close');
+const mainNav = document.getElementById('mainNav');
 
+// УЛУЧШЕННЫЙ ПОИСК ТОЛЬКО ПО СЛОВАМ
+function searchWords(query) {
+  const q = query.toLowerCase().trim();
+  if (!q) return entries;
+  
+  return entries.filter(item => {
+    // Ищем только в поле "word" (слово)
+    return item.word.toLowerCase().includes(q);
+  });
+}
+
+function updateSearchInfo(results, query) {
+  if (!query) {
+    searchInfoEl.textContent = 'Начните вводить слово для поиска';
+    searchInfoEl.style.background = 'rgba(139,69,19,0.05)';
+    searchInfoEl.style.borderLeftColor = 'var(--accent)';
+    return;
+  }
+  
+  if (results.length === 0) {
+    searchInfoEl.textContent = `По запросу "${query}" ничего не найдено`;
+    searchInfoEl.style.background = 'rgba(231, 76, 60, 0.1)';
+    searchInfoEl.style.borderLeftColor = '#e74c3c';
+  } else {
+    searchInfoEl.textContent = `Найдено ${results.length} слов по запросу "${query}"`;
+    searchInfoEl.style.background = 'rgba(39, 174, 96, 0.1)';
+    searchInfoEl.style.borderLeftColor = '#27ae60';
+  }
+}
+
+function clearSearch() {
+  searchEl.value = '';
+  searchClearEl.style.display = 'none';
+  searchInfoEl.style.background = 'rgba(139,69,19,0.05)';
+  searchInfoEl.style.borderLeftColor = 'var(--accent)';
+  renderList();
+}
+
+// АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ
+function toggleMobileMenu() {
+  mainNav.classList.toggle('active');
+}
+
+function closeMobileMenu() {
+  mainNav.classList.remove('active');
+}
+
+// Обработчик клика вне меню
+document.addEventListener('click', (e) => {
+  if (!mainNav.contains(e.target) && !e.target.classList.contains('mobile-menu-btn')) {
+    closeMobileMenu();
+  }
+});
+
+// ОСНОВНЫЕ ФУНКЦИИ
 function init() {
   renderLetters();
   renderList();
-  searchEl.addEventListener('input', renderList);
+  updateStats();
+  
+  searchEl.addEventListener('input', function() {
+    searchClearEl.style.display = this.value ? 'block' : 'none';
+    renderList();
+  });
   
   closeBtn.addEventListener('click', closeModal);
   window.addEventListener('click', (e) => {
     if (e.target === modal) closeModal();
   });
+  
+  // Закрытие мобильного меню при ресайзе
+  window.addEventListener('resize', closeMobileMenu);
+  
+  createParticles();
 }
 
 function showPage(page) {
-  document.getElementById('dictionary-page').style.display = 'none';
-  document.getElementById('songs-page').style.display = 'none';
+  document.getElementById('dictionary-page').style.display = page === 'dictionary' ? 'flex' : 'none';
+  document.getElementById('songs-page').style.display = page === 'songs' ? 'flex' : 'none';
   
   document.querySelectorAll('.nav-btn').forEach(btn => {
     btn.classList.remove('active');
   });
   
   if (page === 'dictionary') {
-    document.getElementById('dictionary-page').style.display = 'flex';
     document.querySelector('.nav-btn[onclick="showPage(\'dictionary\')"]').classList.add('active');
     document.getElementById('pageSubtitle').textContent = 'Словарь якутского языка';
-    currentPage = 'dictionary';
   } else if (page === 'songs') {
-    document.getElementById('songs-page').style.display = 'flex';
     document.querySelector('.nav-btn[onclick="showPage(\'songs\')"]').classList.add('active');
     document.getElementById('pageSubtitle').textContent = 'Якутские песни и стихи';
-    currentPage = 'songs';
   }
+  
+  currentPage = page;
+  closeMobileMenu();
 }
 
 function renderLetters() {
@@ -1249,23 +2051,36 @@ function renderLetters() {
 }
 
 function renderList() {
-  const q = (searchEl.value||'').trim().toLowerCase();
-  const filtered = entries.filter(e=>{
-    if (activeLetter && (e.word||'')[0].toUpperCase() !== activeLetter) return false;
-    if (!q) return true;
-    return (e.word||'').toLowerCase().includes(q);
-  }).sort((a,b)=> (a.word||'').localeCompare(b.word||'','ru'));
+  const q = searchEl.value.trim();
+  let filtered = entries;
+  
+  if (q) {
+    filtered = searchWords(q);
+  } else if (activeLetter) {
+    filtered = entries.filter(e => (e.word||'')[0]?.toUpperCase() === activeLetter);
+  }
+  
+  updateSearchInfo(filtered, q);
+  updateStats(filtered.length);
 
   if (filtered.length === 0) {
-    listEl.innerHTML = '<div style="grid-column:1/-1;padding:2rem;background:linear-gradient(180deg,#fff,#fffaf0);border-radius:12px;text-align:center;color:var(--muted)">Ничего не найдено</div>';
-    favEl.innerHTML = '<li style="color:var(--muted)">Пока нет</li>';
+    listEl.innerHTML = '<div style="grid-column:1/-1;padding:2rem;background:linear-gradient(180deg,#fff,#fffaf5);border-radius:12px;text-align:center;color:var(--muted);border:2px dashed rgba(139,69,19,0.2)">Ничего не найдено</div>';
+    favEl.innerHTML = '<li style="color:var(--muted)">Пока нет избранных слов</li>';
     return;
   }
 
   listEl.innerHTML = filtered.map(item => `
     <article class="card" data-id="${item.id}" onclick="openModal(${item.id})">
+      ${item.image ? 
+        `<img src="${item.image}" alt="${item.word}" class="card-image" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">` : 
+        ''
+      }
+      ${!item.image ? 
+        `<div class="image-placeholder">📷 Нет фото</div>` : 
+        '<div class="image-placeholder" style="display:none">📷 Нет фото</div>'
+      }
       <h3 class="word">${escapeHtml(item.word)} <span class="pos">${escapeHtml(item.pos||'')}</span></h3>
-      <div class="def">${escapeHtml((item.definition||'').substring(0, 100) + '...')}</div>
+      <div class="def">${escapeHtml((item.definition||'').substring(0, 100) + (item.definition.length > 100 ? '...' : ''))}</div>
       <div class="actions">
         <button class="btn" onclick="event.stopPropagation();openModal(${item.id})">📖 Подробнее</button>
         <button class="btn" onclick="event.stopPropagation();toggleFav(${item.id})">${favorites.has(item.id)?'★':'☆'} Избранное</button>
@@ -1278,10 +2093,21 @@ function renderList() {
 function renderFavorites() {
   const favs = entries.filter(e => favorites.has(e.id));
   if (favs.length === 0) {
-    favEl.innerHTML = '<li style="color:var(--muted)">Пока нет</li>';
+    favEl.innerHTML = '<li style="color:var(--muted)">Пока нет избранных слов</li>';
     return;
   }
-  favEl.innerHTML = favs.map(f=>`<li onclick="openModal(${f.id})" style="cursor:pointer;padding:0.2rem 0;">${escapeHtml(f.word)}</li>`).join('');
+  favEl.innerHTML = favs.map(f=>`
+    <li onclick="openModal(${f.id})">
+      ${escapeHtml(f.word)}
+      <button class="remove-fav" onclick="event.stopPropagation();toggleFav(${f.id})" title="Удалить из избранного">×</button>
+    </li>
+  `).join('');
+}
+
+function updateStats(foundCount = entries.length) {
+  document.getElementById('totalWords').textContent = entries.length;
+  document.getElementById('favCount').textContent = favorites.size;
+  document.getElementById('foundCount').textContent = foundCount;
 }
 
 function openModal(id) {
@@ -1294,22 +2120,31 @@ function openModal(id) {
   document.getElementById('modalWord').textContent = item.word;
   document.getElementById('modalPos').textContent = item.pos || 'не указано';
   document.getElementById('modalDefinition').textContent = item.definition || 'нет определения';
-  document.getElementById('modalExamples').textContent = item.examples || 'примеры отсутствуют';
   
   const img = document.getElementById('modalWordImage');
   const placeholder = document.querySelector('.word-image .placeholder');
   
   if (item.image) {
     img.src = item.image;
+    img.alt = item.word;
     img.style.display = 'block';
     placeholder.style.display = 'none';
+    
+    // Обработчик ошибки загрузки изображения
+    img.onerror = function() {
+      this.style.display = 'none';
+      placeholder.style.display = 'block';
+      placeholder.textContent = '📷 Изображение не загружено';
+    };
   } else {
     img.style.display = 'none';
     placeholder.style.display = 'block';
+    placeholder.textContent = '📷 Изображение отсутствует';
   }
   
   modal.style.display = 'block';
   document.body.style.overflow = 'hidden';
+  closeMobileMenu();
 }
 
 function closeModal() {
@@ -1323,8 +2158,11 @@ function toggleFav(id) {
   } else {
     favorites.add(id);
   }
+  
+  localStorage.setItem('dictionaryFavorites', JSON.stringify([...favorites]));
   renderList();
   renderFavorites();
+  updateStats();
 }
 
 function copyText(id) {
@@ -1339,14 +2177,48 @@ function copyText(id) {
 function escapeHtml(str) {
   if (!str) return '';
   return String(str)
-    .replaceAll('&','&amp;')
-    .replaceAll('<','&lt;')
-    .replaceAll('>','&gt;')
-    .replaceAll('"','&quot;')
-    .replaceAll("'",'&#39;');
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;')
+    .replace(/'/g,'&#39;');
 }
 
-init();
+// Аудио функции
+function togglePlay(songId) {
+  const playBtn = document.querySelector(`#player-${songId} .play-btn`);
+  playBtn.textContent = playBtn.textContent === '▶' ? '⏸' : '▶';
+}
+
+// Создание частиц
+function createParticles() {
+  const container = document.getElementById('particles-container');
+  if (!container) return;
+  
+  for (let i = 0; i < 15; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'floating-particle';
+    
+    const size = Math.random() * 6 + 2;
+    const left = Math.random() * 100;
+    const delay = Math.random() * 5;
+    const duration = Math.random() * 10 + 10;
+    
+    particle.style.cssText = `
+      width: ${size}px;
+      height: ${size}px;
+      top: ${Math.random() * 100}%;
+      left: ${left}%;
+      animation-delay: ${delay}s;
+      animation-duration: ${duration}s;
+    `;
+    
+    container.appendChild(particle);
+  }
+}
+
+// Инициализация
+document.addEventListener('DOMContentLoaded', init);
 </script>
 </body>
 </html>

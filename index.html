@@ -2814,6 +2814,7 @@ function copyText(id) {
 }
 
 // Функции для песен
+// Функции для песен
 function searchSongs(query) {
   const q = query.toLowerCase().trim();
   if (!q) return songsData;
@@ -2863,28 +2864,20 @@ function renderSongsList() {
   
   if (filteredSongs.length === 0) {
     songsListEl.innerHTML = `
-      <div class="song-card text-center fade-in">
+      <div class="song-card text-center">
         <div class="song-content text-white-60">
           Песни не найдены
         </div>
       </div>
     `;
-    
-    setTimeout(() => {
-      const message = songsListEl.querySelector('.song-card');
-      if (message) {
-        message.classList.add('visible');
-      }
-    }, 100);
-    
     return;
   }
   
-  songsListEl.innerHTML = filteredSongs.map((song, index) => `
-    <div class="song-card fade-in delay-${index % 4}" data-song-id="${song.id}">
+  songsListEl.innerHTML = filteredSongs.map(song => `
+    <div class="song-card">
       <div class="song-title">${escapeHtml(song.title)}</div>
       ${song.audioId ? `
-      <div class="audio-player fade-in">
+      <div class="audio-player" id="player-${song.audioId}">
         <audio id="audio-${song.audioId}" preload="metadata">
           <source src="songs/${song.audioId}.mp3" type="audio/mpeg">
           <source src="songs/${song.audioId}.ogg" type="audio/ogg">
@@ -2910,19 +2903,6 @@ function renderSongsList() {
       <div class="song-meta">${escapeHtml(song.meta)}</div>
     </div>
   `).join('');
-  
-  setTimeout(() => {
-    const songCards = songsListEl.querySelectorAll('.song-card');
-    const audioPlayers = songsListEl.querySelectorAll('.audio-player');
-    
-    songCards.forEach(card => {
-      card.classList.add('visible');
-    });
-    
-    audioPlayers.forEach(player => {
-      player.classList.add('visible');
-    });
-  }, 100);
   
   initAudioPlayersForSongs(filteredSongs);
 }
@@ -3062,6 +3042,32 @@ function escapeHtml(str) {
     .replace(/'/g,'&#39;');
 }
 
+function createParticles() {
+  const container = document.getElementById('particles-container');
+  if (!container) return;
+  
+  for (let i = 0; i < 15; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'floating-particle';
+    
+    const size = Math.random() * 6 + 2;
+    const left = Math.random() * 100;
+    const delay = Math.random() * 5;
+    const duration = Math.random() * 10 + 10;
+    
+    particle.style.cssText = `
+      width: ${size}px;
+      height: ${size}px;
+      top: ${Math.random() * 100}%;
+      left: ${left}%;
+      animation-delay: ${delay}s;
+      animation-duration: ${duration}s;
+    `;
+    
+    container.appendChild(particle);
+  }
+}
+
 // Главная функция инициализации
 function init() {
   renderLetters();
@@ -3100,6 +3106,7 @@ function init() {
 }
 
 document.addEventListener('DOMContentLoaded', init);
+
 </script>
 </body>
 </html>

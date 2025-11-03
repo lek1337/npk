@@ -73,6 +73,227 @@ body {
   }
 }
 
+/* Унифицированные анимации с одинаковым временем */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes letterPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) rotate(-5deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+}
+
+@keyframes modalSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Унифицированные классы анимаций с одинаковым временем */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.slide-in-left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: all 0.5s ease-out;
+}
+
+.slide-in-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.slide-in-right {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: all 0.5s ease-out;
+}
+
+.slide-in-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.scale-in {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: all 0.5s ease-out;
+}
+
+.scale-in.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Анимация для карточек при фильтрации */
+.card {
+  transition: all 0.4s ease-out;
+}
+
+.card.fade-out {
+  opacity: 0;
+  transform: scale(0.9);
+  pointer-events: none;
+}
+
+/* Анимация для букв фильтра */
+.letter-button {
+  transition: all 0.4s ease-out;
+}
+
+.letter-button.animate-in {
+  animation: letterPop 0.5s ease-out forwards;
+}
+
+/* Анимация для поиска */
+.search-container {
+  transition: all 0.5s ease-out;
+}
+
+.search-container.animate-in {
+  animation: fadeInDown 0.5s ease-out forwards;
+}
+
+/* Анимация для статистики */
+.stats-card {
+  transition: all 0.5s ease-out;
+}
+
+.stats-card.animate-in {
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+/* Анимация для модального окна */
+.modal-content {
+  transition: all 0.5s ease-out;
+}
+
+.modal.animate-in .modal-content {
+  animation: modalSlideIn 0.5s ease-out forwards;
+}
+
+/* Анимация для смены страниц */
+.page-transition {
+  transition: all 0.5s ease-out;
+}
+
+.page-enter {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.page-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.page-exit-active {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+/* Анимация для песен */
+.song-card {
+  transition: all 0.5s ease-out;
+}
+
+.song-card.animate-in {
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+/* Анимация для аудиоплеера */
+.audio-player {
+  transition: all 0.5s ease-out;
+}
+
+.audio-player.animate-in {
+  animation: fadeInLeft 0.5s ease-out forwards;
+}
+
+/* Задержки для последовательного появления */
+.delay-1 { transition-delay: 0.1s; animation-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; animation-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; animation-delay: 0.3s; }
+.delay-4 { transition-delay: 0.4s; animation-delay: 0.4s; }
+.delay-5 { transition-delay: 0.5s; animation-delay: 0.5s; }
+
+/* Обновленный фон с иконками */
 .animated-background {
   position: fixed;
   top: 0;
@@ -86,14 +307,14 @@ body {
 .main-gradient {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, #1a0b0b 0%, #2d1a0f 50%, #3c2a1f 100%);
+  background: linear-gradient(135deg, #8B4513 0%, #A0522D 50%, #D2691E 100%);
 }
 
 .gradient-overlay {
   position: absolute;
   inset: 0;
-  opacity: 0.6;
-  background: linear-gradient(45deg, #1a0b0b 0%, #2d1a0f 25%, #3c2a1f 50%, #5d4037 75%, #1a0b0b 100%);
+  opacity: 0.5;
+  background: linear-gradient(45deg, #8B4513 0%, #A0522D 25%, #D2691E 50%, #CD853F 75%, #8B4513 100%);
   background-size: 400% 400%;
   animation: gradient-flow 15s ease infinite;
 }
@@ -103,7 +324,7 @@ body {
   border-radius: 50%;
   filter: blur(60px);
   opacity: 0.3;
-  animation: float-slow 25s ease-in-out infinite;
+  animation: float-slow 20s ease-in-out infinite;
 }
 
 .orb-1 {
@@ -111,7 +332,7 @@ body {
   left: 10%;
   width: 400px;
   height: 400px;
-  background: radial-gradient(circle, rgba(139, 69, 19, 0.8) 0%, rgba(139, 69, 19, 0) 70%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 70%);
 }
 
 .orb-2 {
@@ -119,8 +340,8 @@ body {
   right: 10%;
   width: 500px;
   height: 500px;
-  background: radial-gradient(circle, rgba(160, 82, 45, 0.7) 0%, rgba(160, 82, 45, 0) 70%);
-  animation-delay: -7s;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 70%);
+  animation-delay: -5s;
 }
 
 .orb-3 {
@@ -129,14 +350,14 @@ body {
   transform: translate(-50%, -50%);
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, rgba(210, 105, 30, 0.6) 0%, rgba(210, 105, 30, 0) 70%);
-  animation-delay: -14s;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 70%);
+  animation-delay: -10s;
 }
 
 .grid-pattern {
   position: absolute;
   inset: 0;
-  opacity: 0.05;
+  opacity: 0.1;
   background-image: 
     linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
@@ -147,17 +368,31 @@ body {
   position: absolute;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.3);
-  opacity: 0.15;
-  animation: float-particle 20s ease-in-out infinite;
+  opacity: 0.2;
+  animation: float-particle 15s ease-in-out infinite;
+}
+
+.education-icon {
+  position: absolute;
+  opacity: 0.05;
+  animation: float-slow 25s ease-in-out infinite;
 }
 
 .vignette {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
+  background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.2) 100%);
 }
 
+.glow-spot {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  animation: float-slow 20s ease-in-out infinite;
+}
+
+/* Остальные стили остаются без изменений */
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -878,6 +1113,7 @@ input:focus {
 </style>
 </head>
 <body>
+<!-- Обновленный фон с иконками -->
 <div class="animated-background">
   <div class="main-gradient"></div>
   <div class="gradient-overlay"></div>
@@ -885,13 +1121,22 @@ input:focus {
   <div class="floating-orb orb-2"></div>
   <div class="floating-orb orb-3"></div>
   <div class="grid-pattern"></div>
+  
+  <!-- Плавающие частицы -->
   <div id="particles-container"></div>
+  
+  <!-- Образовательные иконки -->
+  <div class="absolute inset-0 opacity-5" id="education-icons"></div>
+  
+  <!-- Светящиеся пятна -->
+  <div class="absolute inset-0" id="glow-spots"></div>
+  
   <div class="vignette"></div>
 </div>
 
 <div class="min-h-screen relative overflow-hidden">
   <div class="relative z-10">
-    <div class="text-center mb-12 pt-8">
+    <div class="text-center mb-12 pt-8 fade-in">
       <h1 class="text-white mb-4" style="font-size: 3rem; font-weight: 700;">
         Электроннай тылдьыт
       </h1>
@@ -900,7 +1145,7 @@ input:focus {
       </p>
     </div>
 
-    <div class="max-w-3xl mx-auto mb-8">
+    <div class="max-w-3xl mx-auto mb-8 fade-in delay-1">
       <div class="nav-tabs">
         <button class="nav-tab active" onclick="showPage('dictionary')">
           📚 Словарь
@@ -911,9 +1156,9 @@ input:focus {
       </div>
     </div>
 
-    <div id="dictionary-page">
+    <div id="dictionary-page" class="page-transition">
       <div class="main-container">
-        <aside class="sidebar">
+        <aside class="sidebar fade-in delay-2">
           <div class="search-container">
             <input id="search" class="search-input" placeholder="🔍 Поиск слова..." />
             <button class="search-button" onclick="clearSearch()">×</button>
@@ -925,7 +1170,7 @@ input:focus {
           <div class="text-white font-semibold mt-6 mb-3">⭐ Избранное</div>
           <ul class="fav-list" id="favorites"><li style="color:rgba(255,255,255,0.6)">Пока нет избранных слов</li></ul>
           
-          <div class="stats-card mt-6">
+          <div class="stats-card">
             <div class="flex justify-between mb-2"><span class="text-white-70">Всего слов:</span> <span class="text-white font-semibold" id="totalWords">0</span></div>
             <div class="flex justify-between mb-2"><span class="text-white-70">В избранном:</span> <span class="text-white font-semibold" id="favCount">0</span></div>
             <div class="flex justify-between"><span class="text-white-70">Найдено:</span> <span class="text-white font-semibold" id="foundCount">0</span></div>
@@ -938,13 +1183,13 @@ input:focus {
       </div>
     </div>
 
-    <div id="songs-page" style="display: none;">
+    <div id="songs-page" style="display: none;" class="page-transition">
       <div class="songs-container">
-        <div class="search-container mb-6">
+        <div class="search-container mb-6 fade-in">
           <input id="songs-search" class="search-input" placeholder="🔍 Поиск по названию песни..." />
           <button class="search-button" onclick="clearSongsSearch()">×</button>
         </div>
-        <div class="text-white-70 text-sm mb-4 text-center" id="songsSearchInfo">
+        <div class="text-white-70 text-sm mb-4 text-center fade-in delay-1" id="songsSearchInfo">
           Всего песен: 10
         </div>
 
@@ -991,7 +1236,7 @@ input:focus {
 </div>
 
 <script>
-// Данные слов
+// Полные данные слов
 const entries = [
   {
     "id": 1,
@@ -2107,7 +2352,7 @@ const songsData = [
 Күһүҥҥү тыам нап-намыын
 Куру-һары чуумпута.`,
     meta: "Ырыа хомуурунньуга",
-    audioId: "kuuhunө"
+    audioId: "kuuhun"
   }
 ];
 
@@ -2127,7 +2372,208 @@ const favEl = document.getElementById('favorites');
 const modal = document.getElementById('wordModal');
 const closeBtn = document.querySelector('.close');
 
-// Функции для словаря
+// Функции для создания улучшенного фона
+function createEnhancedBackground() {
+  createParticles();
+  createEducationIcons();
+  createGlowSpots();
+}
+
+function createParticles() {
+  const container = document.getElementById('particles-container');
+  if (!container) return;
+  
+  for (let i = 0; i < 50; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'floating-particle';
+    
+    const size = Math.random() * 8 + 3;
+    const left = Math.random() * 100;
+    const delay = Math.random() * 5;
+    const duration = Math.random() * 10 + 15;
+    
+    particle.style.cssText = `
+      width: ${size}px;
+      height: ${size}px;
+      top: ${Math.random() * 100}%;
+      left: ${left}%;
+      animation-delay: ${delay}s;
+      animation-duration: ${duration}s;
+    `;
+    
+    container.appendChild(particle);
+  }
+}
+
+function createEducationIcons() {
+  const container = document.getElementById('education-icons');
+  if (!container) return;
+  
+  // Книги
+  for (let i = 0; i < 8; i++) {
+    const icon = document.createElement('div');
+    icon.className = 'education-icon';
+    icon.innerHTML = `
+      <svg width="60" height="60" viewBox="0 0 24 24" fill="white">
+        <path d="M4 19.5C4 18.837 4.5 18 5.5 18H20V4H6.5C5.5 4 4 4.837 4 5.5V19.5ZM20 20H5.5C4.5 20 4 19.5 4 19.5V19.5C4 19.5 4.5 19 5.5 19H20V20ZM21 2H6.5C5.12 2 4 3 4 4.5V19.5C4 21 5.12 22 6.5 22H21C21.55 22 22 21.55 22 21V3C22 2.45 21.55 2 21 2Z"/>
+      </svg>
+    `;
+    
+    icon.style.cssText = `
+      top: ${Math.random() * 90}%;
+      left: ${Math.random() * 90}%;
+      transform: rotate(${Math.random() * 360}deg);
+      animation-delay: ${Math.random() * 10}s;
+    `;
+    
+    container.appendChild(icon);
+  }
+  
+  // Дипломы
+  for (let i = 0; i < 6; i++) {
+    const icon = document.createElement('div');
+    icon.className = 'education-icon';
+    icon.innerHTML = `
+      <svg width="70" height="70" viewBox="0 0 24 24" fill="white">
+        <path d="M12 3L1 9L12 15L21 10.09V17H23V9L12 3ZM5 13.18V17.18L12 21L19 17.18V13.18L12 17L5 13.18Z"/>
+      </svg>
+    `;
+    
+    icon.style.cssText = `
+      top: ${Math.random() * 90}%;
+      left: ${Math.random() * 90}%;
+      transform: rotate(${Math.random() * 360}deg);
+      animation-delay: ${Math.random() * 10}s;
+    `;
+    
+    container.appendChild(icon);
+  }
+  
+  // Лампочки
+  for (let i = 0; i < 6; i++) {
+    const icon = document.createElement('div');
+    icon.className = 'education-icon';
+    icon.innerHTML = `
+      <svg width="55" height="55" viewBox="0 0 24 24" fill="white">
+        <path d="M9 21C9 21.55 9.45 22 10 22H14C14.55 22 15 21.55 15 21V20H9V21ZM12 2C8.14 2 5 5.14 5 9C5 11.38 6.19 13.47 8 14.74V17C8 17.55 8.45 18 9 18H15C15.55 18 16 17.55 16 17V14.74C17.81 13.47 19 11.38 19 9C19 5.14 15.86 2 12 2Z"/>
+      </svg>
+    `;
+    
+    icon.style.cssText = `
+      top: ${Math.random() * 90}%;
+      left: ${Math.random() * 90}%;
+      transform: rotate(${Math.random() * 360}deg);
+      animation-delay: ${Math.random() * 10}s;
+    `;
+    
+    container.appendChild(icon);
+  }
+  
+  // Ноты
+  for (let i = 0; i < 10; i++) {
+    const icon = document.createElement('div');
+    icon.className = 'education-icon';
+    icon.innerHTML = `
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="white">
+        <path d="M12 3V13.55C11.41 13.21 10.73 13 10 13C7.79 13 6 14.79 6 17C6 19.21 7.79 21 10 21C12.21 21 14 19.21 14 17V7H18V3H12Z"/>
+      </svg>
+    `;
+    
+    icon.style.cssText = `
+      top: ${Math.random() * 90}%;
+      left: ${Math.random() * 90}%;
+      transform: rotate(${Math.random() * 360}deg);
+      animation-delay: ${Math.random() * 10}s;
+      animation-duration: ${Math.random() * 10 + 15}s;
+    `;
+    
+    container.appendChild(icon);
+  }
+}
+
+function createGlowSpots() {
+  const container = document.getElementById('glow-spots');
+  if (!container) return;
+  
+  for (let i = 0; i < 12; i++) {
+    const glow = document.createElement('div');
+    glow.className = 'glow-spot';
+    
+    const size = Math.random() * 200 + 100;
+    const opacity = Math.random() * 0.15 + 0.05;
+    
+    glow.style.cssText = `
+      width: ${size}px;
+      height: ${size}px;
+      top: ${Math.random() * 100}%;
+      left: ${Math.random() * 100}%;
+      background: radial-gradient(circle, rgba(255,255,255,${opacity}) 0%, transparent 70%);
+      animation-delay: ${Math.random() * 10}s;
+    `;
+    
+    container.appendChild(glow);
+  }
+}
+
+// Функция для наблюдения за появлением элементов при скролле
+function initScrollAnimations() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  });
+
+  document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in').forEach(el => {
+    observer.observe(el);
+  });
+}
+
+function animateLetters() {
+  const letters = document.querySelectorAll('.letter-button');
+  letters.forEach((letter, index) => {
+    letter.classList.add('animate-in');
+    letter.style.animationDelay = `${index * 0.05}s`;
+    
+    setTimeout(() => {
+      letter.classList.remove('animate-in');
+    }, 1000);
+  });
+}
+
+function animateSearch() {
+  const searchContainer = document.querySelector('.search-container');
+  if (searchContainer) {
+    searchContainer.classList.add('animate-in');
+    setTimeout(() => {
+      searchContainer.classList.remove('animate-in');
+    }, 600);
+  }
+}
+
+function animateStats() {
+  const statsCard = document.querySelector('.stats-card');
+  if (statsCard) {
+    statsCard.classList.add('animate-in');
+    setTimeout(() => {
+      statsCard.classList.remove('animate-in');
+    }, 600);
+  }
+}
+
+function animateModal() {
+  const modal = document.getElementById('wordModal');
+  if (modal) {
+    modal.classList.add('animate-in');
+  }
+}
+
+// Основные функции словаря
 function searchWords(query) {
   const q = query.toLowerCase().trim();
   if (!q) return entries;
@@ -2158,8 +2604,39 @@ function showPage(page) {
   const songsPage = document.getElementById('songs-page');
   const subtitle = document.getElementById('pageSubtitle');
   
-  if (dictPage) dictPage.style.display = page === 'dictionary' ? 'block' : 'none';
-  if (songsPage) songsPage.style.display = page === 'songs' ? 'block' : 'none';
+  if (currentPage === page) return;
+  
+  // Анимация перехода
+  if (currentPage === 'dictionary' && dictPage) {
+    dictPage.classList.add('page-exit-active');
+  } else if (currentPage === 'songs' && songsPage) {
+    songsPage.classList.add('page-exit-active');
+  }
+  
+  setTimeout(() => {
+    if (dictPage) {
+      dictPage.style.display = page === 'dictionary' ? 'block' : 'none';
+      dictPage.classList.remove('page-exit-active');
+    }
+    if (songsPage) {
+      songsPage.style.display = page === 'songs' ? 'block' : 'none';
+      songsPage.classList.remove('page-exit-active');
+    }
+    
+    // Добавляем классы анимации входа
+    if (page === 'dictionary' && dictPage) {
+      dictPage.classList.add('page-enter-active');
+      setTimeout(() => {
+        if (dictPage) dictPage.classList.remove('page-enter-active');
+      }, 400);
+    } else if (page === 'songs' && songsPage) {
+      songsPage.classList.add('page-enter-active');
+      setTimeout(() => {
+        if (songsPage) songsPage.classList.remove('page-enter-active');
+      }, 400);
+      setTimeout(() => renderSongsList(), 100);
+    }
+  }, 200);
   
   document.querySelectorAll('.nav-tab').forEach(btn => btn.classList.remove('active'));
   
@@ -2169,7 +2646,6 @@ function showPage(page) {
   } else {
     document.querySelector('.nav-tab[onclick="showPage(\'songs\')"]').classList.add('active');
     if (subtitle) subtitle.textContent = 'Якутские песни и стихи';
-    setTimeout(() => renderSongsList(), 0);
   }
   currentPage = page;
 }
@@ -2202,13 +2678,21 @@ function renderList() {
   updateStats(filtered.length);
 
   if (filtered.length === 0) {
-    listEl.innerHTML = '<div class="term-card text-center">Ничего не найдено</div>';
+    listEl.innerHTML = '<div class="term-card text-center fade-in">Ничего не найдено</div>';
     if (favEl) favEl.innerHTML = '<li style="color:rgba(255,255,255,0.6)">Пока нет избранных слов</li>';
+    
+    setTimeout(() => {
+      const message = listEl.querySelector('.term-card');
+      if (message) {
+        message.classList.add('visible');
+      }
+    }, 100);
+    
     return;
   }
 
-  listEl.innerHTML = filtered.map(item => `
-    <div class="card" data-id="${item.id}" onclick="openModal(${item.id})">
+  listEl.innerHTML = filtered.map((item, index) => `
+    <div class="card fade-in delay-${index % 5}" data-id="${item.id}" onclick="openModal(${item.id})">
       ${item.image ? `<img src="${item.image}" alt="${item.word}" class="card-image" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">` : ''}
       ${!item.image ? `<div class="image-placeholder">📷 Нет фото</div>` : '<div class="image-placeholder" style="display:none">📷 Нет фото</div>'}
       <div class="word">${escapeHtml(item.word)} <span class="pos">${escapeHtml(item.pos||'')}</span></div>
@@ -2219,6 +2703,14 @@ function renderList() {
       </div>
     </div>
   `).join('');
+  
+  setTimeout(() => {
+    const cards = listEl.querySelectorAll('.card');
+    cards.forEach(card => {
+      card.classList.add('visible');
+    });
+  }, 100);
+  
   renderFavorites();
 }
 
@@ -2283,6 +2775,8 @@ function openModal(id) {
   
   modal.style.display = 'block';
   document.body.style.overflow = 'hidden';
+  
+  animateModal();
 }
 
 function closeModal() {
@@ -2369,20 +2863,28 @@ function renderSongsList() {
   
   if (filteredSongs.length === 0) {
     songsListEl.innerHTML = `
-      <div class="song-card text-center">
+      <div class="song-card text-center fade-in">
         <div class="song-content text-white-60">
           Песни не найдены
         </div>
       </div>
     `;
+    
+    setTimeout(() => {
+      const message = songsListEl.querySelector('.song-card');
+      if (message) {
+        message.classList.add('visible');
+      }
+    }, 100);
+    
     return;
   }
   
-  songsListEl.innerHTML = filteredSongs.map(song => `
-    <div class="song-card">
+  songsListEl.innerHTML = filteredSongs.map((song, index) => `
+    <div class="song-card fade-in delay-${index % 4}" data-song-id="${song.id}">
       <div class="song-title">${escapeHtml(song.title)}</div>
       ${song.audioId ? `
-      <div class="audio-player" id="player-${song.audioId}">
+      <div class="audio-player fade-in">
         <audio id="audio-${song.audioId}" preload="metadata">
           <source src="songs/${song.audioId}.mp3" type="audio/mpeg">
           <source src="songs/${song.audioId}.ogg" type="audio/ogg">
@@ -2408,6 +2910,19 @@ function renderSongsList() {
       <div class="song-meta">${escapeHtml(song.meta)}</div>
     </div>
   `).join('');
+  
+  setTimeout(() => {
+    const songCards = songsListEl.querySelectorAll('.song-card');
+    const audioPlayers = songsListEl.querySelectorAll('.audio-player');
+    
+    songCards.forEach(card => {
+      card.classList.add('visible');
+    });
+    
+    audioPlayers.forEach(player => {
+      player.classList.add('visible');
+    });
+  }, 100);
   
   initAudioPlayersForSongs(filteredSongs);
 }
@@ -2547,38 +3062,20 @@ function escapeHtml(str) {
     .replace(/'/g,'&#39;');
 }
 
-function createParticles() {
-  const container = document.getElementById('particles-container');
-  if (!container) return;
-  
-  for (let i = 0; i < 15; i++) {
-    const particle = document.createElement('div');
-    particle.className = 'floating-particle';
-    
-    const size = Math.random() * 6 + 2;
-    const left = Math.random() * 100;
-    const delay = Math.random() * 5;
-    const duration = Math.random() * 10 + 10;
-    
-    particle.style.cssText = `
-      width: ${size}px;
-      height: ${size}px;
-      top: ${Math.random() * 100}%;
-      left: ${left}%;
-      animation-delay: ${delay}s;
-      animation-duration: ${duration}s;
-    `;
-    
-    container.appendChild(particle);
-  }
-}
-
-// Инициализация
+// Главная функция инициализации
 function init() {
   renderLetters();
   renderList();
   updateStats();
   initAudioPlayers();
+  createEnhancedBackground();
+  
+  setTimeout(() => {
+    initScrollAnimations();
+    animateLetters();
+    animateSearch();
+    animateStats();
+  }, 500);
   
   if (searchEl) {
     searchEl.addEventListener('input', function() {
@@ -2600,8 +3097,6 @@ function init() {
   window.addEventListener('click', (e) => {
     if (e.target === modal) closeModal();
   });
-  
-  createParticles();
 }
 
 document.addEventListener('DOMContentLoaded', init);

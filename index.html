@@ -6,7 +6,6 @@
 <title>Электроннай тылдьыт — Словарь и песни</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* Все предыдущие стили остаются без изменений */
 :root {
   --background: #0a0a0a;
   --foreground: #ffffff;
@@ -41,7 +40,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Анимации фона */
 @keyframes gradient-flow {
   0%, 100% {
     background-position: 0% 50%;
@@ -74,7 +72,6 @@ body {
   }
 }
 
-/* Анимированный фон */
 .animated-background {
   position: fixed;
   top: 0;
@@ -160,7 +157,6 @@ body {
   background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
 }
 
-/* Основные стили */
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -208,14 +204,12 @@ body {
   padding-bottom: 4rem;
 }
 
-/* Текст */
 .text-white { color: white; }
 .text-white-80 { color: rgba(255, 255, 255, 0.8); }
 .text-white-60 { color: rgba(255, 255, 255, 0.6); }
 .text-white-70 { color: rgba(255, 255, 255, 0.7); }
 .text-sm { font-size: 0.875rem; }
 
-/* Flexbox */
 .flex { display: flex; }
 .flex-col { flex-direction: column; }
 .flex-wrap { flex-wrap: wrap; }
@@ -227,14 +221,12 @@ body {
 .gap-4 { gap: 1rem; }
 .gap-6 { gap: 1.5rem; }
 
-/* Grid */
 .grid { display: grid; }
 .grid-cols-1 { grid-template-columns: 1fr; }
 .grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
 .grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
 .space-y-4 > * + * { margin-top: 1rem; }
 
-/* Cards и стеклянный морфизм */
 .backdrop-blur-lg {
   backdrop-filter: blur(16px);
 }
@@ -256,7 +248,6 @@ body {
 .rounded-xl { border-radius: 0.75rem; }
 .rounded-lg { border-radius: 0.5rem; }
 
-/* Кнопки и инпуты */
 button {
   cursor: pointer;
   font-family: inherit;
@@ -276,7 +267,6 @@ input:focus {
 }
 
 .px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
-.px-4 { padding-left: 1rem; padding-right: 1rem; }
 .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
 .py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
 .py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
@@ -287,40 +277,33 @@ input:focus {
 .w-10 { width: 2.5rem; }
 .h-10 { height: 2.5rem; }
 
-/* Позиционирование */
 .absolute { position: absolute; }
-.relative { position: relative; }
 .inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
 .right-3 { right: 0.75rem; }
 .top-1-2 { top: 50%; }
-.-translate-y-1-2 { transform: translateY(-50%); }
+.translate-y-1-2 { transform: translateY(-50%); }
 
-/* Транзишены */
 .transition-all {
   transition: all 0.3s ease;
 }
 
-/* Ховер эффекты */
-.hover\\:bg-white-30:hover { background-color: rgba(255, 255, 255, 0.3); }
-.hover\\:bg-white-20:hover { background-color: rgba(255, 255, 255, 0.2); }
-.hover\\:bg-white-15:hover { background-color: rgba(255, 255, 255, 0.15); }
-.hover\\:text-white-80:hover { color: rgba(255, 255, 255, 0.8); }
-.hover\\:border-white-30:hover { border-color: rgba(255, 255, 255, 0.3); }
+.hover-bg-white-30:hover { background-color: rgba(255, 255, 255, 0.3); }
+.hover-bg-white-20:hover { background-color: rgba(255, 255, 255, 0.2); }
+.hover-bg-white-15:hover { background-color: rgba(255, 255, 255, 0.15); }
+.hover-text-white-80:hover { color: rgba(255, 255, 255, 0.8); }
+.hover-border-white-30:hover { border-color: rgba(255, 255, 255, 0.3); }
 
-.group:hover .group-hover\\:text-white-90 { color: rgba(255, 255, 255, 0.9); }
+.group:hover .group-hover-text-white-90 { color: rgba(255, 255, 255, 0.9); }
 
-/* Focus states */
-.focus\\:outline-none:focus { outline: none; }
-.focus\\:ring-2:focus { box-shadow: 0 0 0 2px var(--ring); }
-.focus\\:ring-white-30:focus { --ring: rgba(255, 255, 255, 0.3); }
+.focus-outline-none:focus { outline: none; }
+.focus-ring-2:focus { box-shadow: 0 0 0 2px var(--ring); }
+.focus-ring-white-30:focus { --ring: rgba(255, 255, 255, 0.3); }
 
-/* Placeholder */
 .placeholder-white-50::placeholder { color: rgba(255, 255, 255, 0.5); }
 
-/* Адаптивность */
 @media (min-width: 768px) {
-  .md\\:grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
-  .md\\:grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .md-grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+  .md-grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
 }
 
 @media (max-width: 768px) {
@@ -330,7 +313,6 @@ input:focus {
   .py-4 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
 }
 
-/* Специфические компоненты */
 .nav-tabs {
   display: flex;
   gap: 1rem;
@@ -474,7 +456,6 @@ input:focus {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Стили для сайдбара и карточек из оригинального кода */
 .sidebar {
   width: 280px;
   flex-shrink: 0;
@@ -514,7 +495,6 @@ input:focus {
   background: rgba(255, 255, 255, 0.15);
 }
 
-/* Убрал рамки вокруг фотографий */
 .card-image {
   width: 100%;
   height: 160px;
@@ -590,7 +570,6 @@ input:focus {
   transform: translateY(-2px);
 }
 
-/* Аудио плеер */
 .audio-player {
   background: rgba(255,255,255,0.1);
   border-radius: 12px;
@@ -675,7 +654,6 @@ input:focus {
   cursor: pointer;
 }
 
-/* Модальное окно */
 .modal {
   display: none;
   position: fixed;
@@ -736,7 +714,6 @@ input:focus {
   padding: 1.5rem;
 }
 
-/* Убрал рамки вокруг фотографий в модальном окне */
 .word-image {
   width: 100%;
   height: 300px;
@@ -797,7 +774,6 @@ input:focus {
   padding-top: 1.5rem;
 }
 
-/* Избранное */
 .fav-list {
   margin-top: 0.5rem;
   background: rgba(255,255,255,0.05);
@@ -843,7 +819,6 @@ input:focus {
   color: white;
 }
 
-/* Layout */
 .main-container {
   display: flex;
   gap: 1.25rem;
@@ -862,7 +837,6 @@ input:focus {
   }
 }
 
-/* Стили для страницы песен */
 .songs-container {
   max-width: 800px;
   margin: 0 auto;
@@ -903,7 +877,6 @@ input:focus {
 </style>
 </head>
 <body>
-<!-- Анимированный фон -->
 <div class="animated-background">
   <div class="main-gradient"></div>
   <div class="gradient-overlay"></div>
@@ -915,20 +888,17 @@ input:focus {
   <div class="vignette"></div>
 </div>
 
-<!-- Основной контент -->
 <div class="min-h-screen relative overflow-hidden">
   <div class="relative z-10">
-    <!-- Заголовок -->
     <div class="text-center mb-12 pt-8">
       <h1 class="text-white mb-4" style="font-size: 3rem; font-weight: 700;">
         Электроннай тылдьыт
       </h1>
-      <p class="text-white/80 max-w-2xl mx-auto" style="font-size: 1.25rem;" id="pageSubtitle">
+      <p class="text-white-80 max-w-2xl mx-auto" style="font-size: 1.25rem;" id="pageSubtitle">
         Словарь якутского языка
       </p>
     </div>
 
-    <!-- Навигационные табы -->
     <div class="max-w-3xl mx-auto mb-8">
       <div class="nav-tabs">
         <button class="nav-tab active" onclick="showPage('dictionary')">
@@ -940,7 +910,6 @@ input:focus {
       </div>
     </div>
 
-    <!-- Страница словаря -->
     <div id="dictionary-page">
       <div class="main-container">
         <aside class="sidebar">
@@ -948,7 +917,7 @@ input:focus {
             <input id="search" class="search-input" placeholder="🔍 Поиск слова..." />
             <button class="search-button" onclick="clearSearch()">×</button>
           </div>
-          <div class="text-white/70 text-sm mt-2 mb-4 text-center" id="searchInfo">Начните вводить слово для поиска</div>
+          <div class="text-white-70 text-sm mt-2 mb-4 text-center" id="searchInfo">Начните вводить слово для поиска</div>
           
           <div class="letter-filter" id="letters"></div>
           
@@ -956,538 +925,36 @@ input:focus {
           <ul class="fav-list" id="favorites"><li style="color:rgba(255,255,255,0.6)">Пока нет избранных слов</li></ul>
           
           <div class="stats-card mt-6">
-            <div class="flex justify-between mb-2"><span class="text-white/70">Всего слов:</span> <span class="text-white font-semibold" id="totalWords">0</span></div>
-            <div class="flex justify-between mb-2"><span class="text-white/70">В избранном:</span> <span class="text-white font-semibold" id="favCount">0</span></div>
-            <div class="flex justify-between"><span class="text-white/70">Найдено:</span> <span class="text-white font-semibold" id="foundCount">0</span></div>
+            <div class="flex justify-between mb-2"><span class="text-white-70">Всего слов:</span> <span class="text-white font-semibold" id="totalWords">0</span></div>
+            <div class="flex justify-between mb-2"><span class="text-white-70">В избранном:</span> <span class="text-white font-semibold" id="favCount">0</span></div>
+            <div class="flex justify-between"><span class="text-white-70">Найдено:</span> <span class="text-white font-semibold" id="foundCount">0</span></div>
           </div>
           
-          <div class="text-white/70 text-sm mt-4 text-center">Подсказка: нажмите на слово для подробной информации</div>
+          <div class="text-white-70 text-sm mt-4 text-center">Подсказка: нажмите на слово для подробной информации</div>
         </aside>
 
         <section class="list" id="list"></section>
       </div>
     </div>
 
-    <!-- Страница песен -->
     <div id="songs-page" style="display: none;">
       <div class="songs-container">
-        <!-- Песня 1 -->
-        <div class="song-card">
-          <div class="song-title">Сайыҥҥы</div>
-          <div class="audio-player" id="player-sayynghi">
-            <audio id="audio-sayynghi" preload="metadata">
-              <!-- Замените ссылку на реальный аудиофайл -->
-              <source src="songs/sayynghi.mp3" type="audio/mpeg">
-              <source src="songs/sayynghi.ogg" type="audio/ogg">
-              Ваш браузер не поддерживает аудио элементы.
-            </audio>
-            <div class="player-controls">
-              <button class="play-btn" onclick="togglePlay('sayynghi')">▶</button>
-              <div class="progress-container" onclick="seek('sayynghi', event)">
-                <div class="progress-bar" id="progress-sayynghi"></div>
-              </div>
-              <div class="time">
-                <span id="currentTime-sayynghi">0:00</span>
-                <span id="duration-sayynghi">0:00</span>
-              </div>
-            </div>
-            <div class="volume-controls">
-              <span class="volume-icon">🔊</span>
-              <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1" onchange="setVolume('sayynghi', this.value)">
-            </div>
-          </div>
-          <div class="song-content">Саймаарыйар күнүм тахсан
-Аан дойдубар анаарар,
-Арылы тиэрбэс көлүччэм
-Көмүс долгунун көтөҕөр.
-
-Сыһыыларым сиккиэринэн 
-Сыймаарыччы тарааннылар,
-Сир симэҕэ сибэккилэрим
-Сиигинэн симириҥнииллэр.
-
-Тунах үрүмэччилэрэ туртаҥнаһа
-Хонууга хойдо тэлээрбиттэр,
-Ырыа чыычаахтарым куоталаһа
-Чыбыгырыы чугдаарбыттар.
-
-Оой, арылыйар алааһым,
-Уйгу сайынтан итирдим,
-Көҥүл санаабын батыһан
-Күн көрүгэр көҕүйдүм.
-
-Тунах үрүмэччитэ буоламмын
-Сир симэҕин ситэрсиэм,
-Күөрэгэй чычаах буоламмын
-Күөх дойдубун хоһуйуом.</div>
-          <div class="song-meta">Мел. Ульяна Сергучева</div>
+        <div class="search-container mb-6">
+          <input id="songs-search" class="search-input" placeholder="🔍 Поиск по названию или тексту песни..." />
+          <button class="search-button" onclick="clearSongsSearch()">×</button>
+        </div>
+        <div class="text-white-70 text-sm mb-4 text-center" id="songsSearchInfo">
+          Всего песен: 10
         </div>
 
-        <!-- Песня 2 -->
-        <div class="song-card">
-          <div class="song-title">Суоллар</div>
-          <div class="audio-player" id="player-suollar">
-            <audio id="audio-suollar" preload="metadata">
-              <source src="songs/suollar.mp3" type="audio/mpeg">
-              <source src="songs/suollar.ogg" type="audio/ogg">
-              Ваш браузер не поддерживает аудио элементы.
-            </audio>
-            <div class="player-controls">
-              <button class="play-btn" onclick="togglePlay('suollar')">▶</button>
-              <div class="progress-container" onclick="seek('suollar', event)">
-                <div class="progress-bar" id="progress-suollar"></div>
-              </div>
-              <div class="time">
-                <span id="currentTime-suollar">0:00</span>
-                <span id="duration-suollar">0:00</span>
-              </div>
-            </div>
-            <div class="volume-controls">
-              <span class="volume-icon">🔊</span>
-              <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1" onchange="setVolume('suollar', this.value)">
-            </div>
-          </div>
-          <div class="song-content">Мин үйэм улуу хорук тымырдара буолан,
-Айгысталлар аараан аартыктар...
-Ол хорук тымыр биир кыһыл таммаҕа буола,
-Мин күө-дьаа тахсабын айан суолугар.
-
-Арыт ытыллыбыт быыра ох оҕото буолан, 
-Ахсым айаннары айанныыбын,
-Арыт тумараҕа муммут тугутчаан курдук,
-Туора дьон ыырдарыгар мунчаарабын.
-
-Оо, ол эрээри хайаан да өтөхпөр төннөбүн,
-Ырбыт айан атыныы иҥэрсийэ...
-Ол улуу түбэлтэрэн кэлээтин атыҥырыы көрөбүн
-Төрөөбүт алааспын мыына, соҥуйа...</div>
-          <div class="song-meta">Ырыа хомуурунньуга</div>
+        <div id="songs-list">
+          <!-- Песни будут загружены здесь -->
         </div>
-
-        <!-- Песня 3 -->
-        <div class="song-card">
-          <div class="song-title">Саха үҥкүүтэ</div>
-          <div class="audio-player" id="player-sakha-unkuute">
-            <audio id="audio-sakha-unkuute" preload="metadata">
-              <source src="songs/sakha-unkuute.mp3" type="audio/mpeg">
-              <source src="songs/sakha-unkuute.ogg" type="audio/ogg">
-              Ваш браузер не поддерживает аудио элементы.
-            </audio>
-            <div class="player-controls">
-              <button class="play-btn" onclick="togglePlay('sakha-unkuute')">▶</button>
-              <div class="progress-container" onclick="seek('sakha-unkuute', event)">
-                <div class="progress-bar" id="progress-sakha-unkuute"></div>
-              </div>
-              <div class="time">
-                <span id="currentTime-sakha-unkuute">0:00</span>
-                <span id="duration-sakha-unkuute">0:00</span>
-              </div>
-            </div>
-            <div class="volume-controls">
-              <span class="volume-icon">🔊</span>
-              <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1" onchange="setVolume('sakha-unkuute', this.value)">
-            </div>
-          </div>
-          <div class="song-content">Үрүмэччи үөрүн курдук,
-Арыы-дьэҥкир халлаан курдук,
-Көөнньөрүүлээх кымыс курдук,
-Көҥүл санаа кыымын курдук
-Дьоллоох саха кыргыттара
-Чороон тутан таҕыстылар.
-
-Ойуу-дьарҕаа тирэҥсэллэр
-Оһуор үктээн киирдилэр,
-Нуоҕай лабаа илиилэр
-Дьол ырыатын тистилэр...
-
-Үөрэ сөхпүт санаабар
-Алаас тыала аҥыс гынар.
-
-Чуумпу Лена долгунунуу,
-Туундара үрүҥ кубатыныы,
-Алаас хотун хатыҥыныы,
-Атан эрэр ньургуһуннуу
-Намыыннарын, наскыылларын,
-Наҕылларын баҕастарын!
-
-Кэрэ бэлиэ кэпсээн курдук,
-Сэрэтиилээх сэһэн курдук,
-Ылбай чаҕаан ырыа курдук,
-Ыраас таптал тылын курдук
-Сахам намыын үҥкүүтэ
-Сахам сирин кэриэтэ!</div>
-          <div class="song-meta">Мел. Аркадий Алексеев</div>
-        </div>
-
-        <!-- Песня 4 -->
-        <div class="song-card">
-          <div class="song-title">Ферма кыргыттара</div>
-          <div class="audio-player" id="player-ferma-kyrgyttara">
-            <audio id="audio-ferma-kyrgyttara" preload="metadata">
-              <source src="songs/ferma-kyrgyttara.mp3" type="audio/mpeg">
-              <source src="songs/ferma-kyrgyttara.ogg" type="audio/ogg">
-              Ваш браузер не поддерживает аудио элементы.
-            </audio>
-            <div class="player-controls">
-              <button class="play-btn" onclick="togglePlay('ferma-kyrgyttara')">▶</button>
-              <div class="progress-container" onclick="seek('ferma-kyrgyttara', event)">
-                <div class="progress-bar" id="progress-ferma-kyrgyttara"></div>
-              </div>
-              <div class="time">
-                <span id="currentTime-ferma-kyrgyttara">0:00</span>
-                <span id="duration-ferma-kyrgyttara">0:00</span>
-              </div>
-            </div>
-            <div class="volume-controls">
-              <span class="volume-icon">🔊</span>
-              <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1" onchange="setVolume('ferma-kyrgyttara', this.value)">
-            </div>
-          </div>
-          <div class="song-content">Билэр дьонум оҕолорун – 
-Биэс эйэҕэс кыргыттары
-Үөрэ даҕаны мин көрдүм
-Үүт-Көлүйэ ферматыгар.
-
-Үрүҥ көмүс бастыҥа,
-Илин-кэлин кэбиһэр,
-Халадаайдаах былааччыйа,
-Хаарыс харсыат кэппиттэр.
-
-Тоҕус былас да буолбатар – 
-Тохтор долгун суһуохтаахтар,
-Туйаарыма Куо да буолбатар
-Туналҕаннаах ньуурдаахтар.
-
-Хатыҥ буолан наскылдьыһа
-Ханыылаһан тахсаннар,
-Сайыҥҥы кэми сайыһа
-Сайдыы-сайдыы хаамсаллар.
-
-Чороон үҥкүүтүн толорон
-Нуоҕалдьыһан киирэргитин
-Уйулҕам хамсыы, долгуйа
-Олус даҕаны көһүттүм.
-
-Ыраах Куорунай тыатыгар,
-Алаас, сайылык дойдубар
-Маннык нарын барахсаттар
-Балаҕан аайы баар буолбат.</div>
-          <div class="song-meta">Ырыа хомуурунньуга</div>
-        </div>
-
-        <!-- Песня 5 -->
-        <div class="song-card">
-          <div class="song-title">Киһиэхэ – төрөөбүт дойдута</div>
-          <div class="audio-player" id="player-kihiyehe-toroobyt-doydu">
-            <audio id="audio-kihiyehe-toroobyt-doydu" preload="metadata">
-              <source src="songs/kihiyehe-toroobyt-doydu.mp3" type="audio/mpeg">
-              <source src="songs/kihiyehe-toroobyt-doydu.ogg" type="audio/ogg">
-              Ваш браузер не поддерживает аудио элементы.
-            </audio>
-            <div class="player-controls">
-              <button class="play-btn" onclick="togglePlay('kihiyehe-toroobyt-doydu')">▶</button>
-              <div class="progress-container" onclick="seek('kihiyehe-toroobyt-doydu', event)">
-                <div class="progress-bar" id="progress-kihiyehe-toroobyt-doydu"></div>
-              </div>
-              <div class="time">
-                <span id="currentTime-kihiyehe-toroobyt-doydu">0:00</span>
-                <span id="duration-kihiyehe-toroobyt-doydu">0:00</span>
-              </div>
-            </div>
-            <div class="volume-controls">
-              <span class="volume-icon">🔊</span>
-              <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1" onchange="setVolume('kihiyehe-toroobyt-doydu', this.value)">
-            </div>
-          </div>
-          <div class="song-content">Киһиэхэ – төрөөбүт дойдута
-Төрөппүт ийэтин кэриэтэ
-:
-Сүрэҕин ытатан, ыллатан,
-Норуот кырдьыгар үөрэтэр.
-
-Киһиэхэ – төрөөбүт дойдута
-Төрөппүт аҕаҕа холонор
-:
-Тоҥорон, буһаран, эрчитэн,
-Ньыгыл укулаат оҥорор.
-
-Киһиэхэ – төрөөбүт дойдута
-Таптыыр дьахтарын кэриэтэ
-:
-Кини дьоло, хомолтото
-Хоодуот, уйаҕас сүрэхтиир.
-
-Киһиэхэ – төрөөбүт дойдута
-Таптыыр оҕотун тэҥнээҕэ
-:
-Кини кэскилин туһугар
-Тыынан да толук ууруоҕа.</div>
-          <div class="song-meta">Ырыа хомуурунньуга</div>
-        </div>
-
-        <!-- Песня 6 с аудиоплеером -->
-        <div class="song-card">
-          <div class="song-title">Бу тыллар буолбатах – кубалар</div>
-          <div class="audio-player" id="player-bu-tyllar">
-            <audio id="audio-bu-tyllar" preload="metadata">
-              <source src="songs/bu-tyllar.mp3" type="audio/mpeg">
-              <source src="songs/bu-tyllar.ogg" type="audio/ogg">
-              Ваш браузер не поддерживает аудио элементы.
-            </audio>
-            <div class="player-controls">
-              <button class="play-btn" onclick="togglePlay('bu-tyllar')">▶</button>
-              <div class="progress-container" onclick="seek('bu-tyllar', event)">
-                <div class="progress-bar" id="progress-bu-tyllar"></div>
-              </div>
-              <div class="time">
-                <span id="currentTime-bu-tyllar">0:00</span>
-                <span id="duration-bu-tyllar">0:00</span>
-              </div>
-            </div>
-            <div class="volume-controls">
-              <span class="volume-icon">🔊</span>
-              <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1" onchange="setVolume('bu-tyllar', this.value)">
-            </div>
-          </div>
-          <div class="song-content">Бу тыллар буолбатах – кубалар.
-Сааскылыы таптаһар кубалар,
-Ып-ыраас, муус маҥан кубалар
-Санньыардык, нарыннык дайаллар
-Бу тыллар буолбатах – сарыаллар.
-
-Кыраман сааскы күөх саҕахпар
-Сандаарар ылааҥы сарыаллар
-Сайаҕас дууһаҕа сырдыыллар.
-
-Бу тыллар буолбатах – ырыалар,
-Таптаабыт сүрэхтэн саҕыллар,
-Абылыы, долгута дуорайар
-Айыы-хаан тып-тыыннаах ырыалар.</div>
-          <div class="song-meta">Ырыа хомуурунньуга</div>
-        </div>
-
-        <!-- Песня 7 с аудиоплеером -->
-        <div class="song-card">
-          <div class="song-title">Доҕоччугуом, тоҕо маннык?..</div>
-          <div class="audio-player" id="player-dogchchuguom">
-            <audio id="audio-dogchchuguom" preload="metadata">
-              <source src="songs/dogchchuguom.mp3" type="audio/mpeg">
-              <source src="songs/dogchchuguom.ogg" type="audio/ogg">
-              Ваш браузер не поддерживает аудио элементы.
-            </audio>
-            <div class="player-controls">
-              <button class="play-btn" onclick="togglePlay('dogchchuguom')">▶</button>
-              <div class="progress-container" onclick="seek('dogchchuguom', event)">
-                <div class="progress-bar" id="progress-dogchchuguom"></div>
-              </div>
-              <div class="time">
-                <span id="currentTime-dogchchuguom">0:00</span>
-                <span id="duration-dogchchuguom">0:00</span>
-              </div>
-            </div>
-            <div class="volume-controls">
-              <span class="volume-icon">🔊</span>
-              <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1" onchange="setVolume('dogchchuguom', this.value)">
-            </div>
-          </div>
-          <div class="song-content">Доҕоччугуом, тоҕо маннык
-Тоҥкурууннук  көрсөн,
-Туохтан дууһаҥ туоххаһыйан
-Чоҕулуччу көрдүн?..
-
-Миигиттэн дуу хоргутаҥҥын
-Үөрэ тоһуйбатыҥ,
-Тугу мин туора туттаммын
-Маннык киэр хайыстыҥ?..
-
-Ыар буруйдаах буоллахпына,
-Муҥатына  ааттыам; 
-Буруйа да суоҕум иһин
-Буруйдаахтыы туттуом...
-
-Хаарыан дьиэм хараҥаччыта,
-Халлаан курдук халыйыый; 
-Үрүҥ дьиэм үрүмэччитэ,
-Үөрэн-көтөн кэлиий?..</div>
-          <div class="song-meta">Ырыа хомуурунньуга</div>
-        </div>
-
-        <!-- Песня 8 с аудиоплеером -->
-        <div class="song-card">
-          <div class="song-title">Доҕоруом, дабай күөх сыырдаргын</div>
-          <div class="audio-player" id="player-dogoruom">
-            <audio id="audio-dogoruom" preload="metadata">
-              <source src="songs/dogoruom.mp3" type="audio/mpeg">
-              <source src="songs/dogoruom.ogg" type="audio/ogg">
-              Ваш браузер не поддерживает аудио элементы.
-            </audio>
-            <div class="player-controls">
-              <button class="play-btn" onclick="togglePlay('dogoruom')">▶</button>
-              <div class="progress-container" onclick="seek('dogoruom', event)">
-                <div class="progress-bar" id="progress-dogoruom"></div>
-              </div>
-              <div class="time">
-                <span id="currentTime-dogoruom">0:00</span>
-                <span id="duration-dogoruom">0:00</span>
-              </div>
-            </div>
-            <div class="volume-controls">
-              <span class="volume-icon">🔊</span>
-              <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1" onchange="setVolume('dogoruom', this.value)">
-            </div>
-          </div>
-          <div class="song-content">Доҕоруом, дабай күөх сыырдаргын,
-Мырааҥҥа көрүс күн тахсыытын.
-Эн өрүү инники сырдыыгын,
-Эн өрүү сүрэхпэр ыллыыгын.
-
-Хараҥа кэрэ да киэһэлэр...
-Халлааҥҥа сулустар хойдоллор
-:
-Эйигин, эйигин кинилэр
-Этэргэ, кэпсииргэ дылылар.
-
-Сылаас тыал иэдэспин бигиирин
-Эн тыыныҥ кэлэр дии саныыбын,
-Өрүллэр сүүрүктэр тыастарын
-Эн көмүс куоласкар холуубун.
-
-Доҕоруом, дабай күөх сыырдаргын,
-Мырааҥҥа көрүс күн тахсыытын.
-Эн өрүү инники сырдыыгын,
-Ол иһин, ол иһин таптыыбын.</div>
-          <div class="song-meta">Ырыа хомуурунньуга</div>
-        </div>
-
-        <!-- Песня 9 с аудиоплеером -->
-        <div class="song-card">
-          <div class="song-title">Эрэн миэхэ</div>
-          <div class="audio-player" id="player-eren-mihe">
-            <audio id="audio-eren-mihe" preload="metadata">
-              <source src="songs/eren-mihe.mp3" type="audio/mpeg">
-              <source src="songs/eren-mihe.ogg" type="audio/ogg">
-              Ваш браузер не поддерживает аудио элементы.
-            </audio>
-            <div class="player-controls">
-              <button class="play-btn" onclick="togglePlay('eren-mihe')">▶</button>
-              <div class="progress-container" onclick="seek('eren-mihe', event)">
-                <div class="progress-bar" id="progress-eren-mihe"></div>
-              </div>
-              <div class="time">
-                <span id="currentTime-eren-mihe">0:00</span>
-                <span id="duration-eren-mihe">0:00</span>
-              </div>
-            </div>
-            <div class="volume-controls">
-              <span class="volume-icon">🔊</span>
-              <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1" onchange="setVolume('eren-mihe', this.value)">
-            </div>
-          </div>
-          <div class="song-content">Эрэн миэхэ,
-Эрэн миэхэ...
-Эрэн илиим эрчимигэр,
-Эрэн сүрэҕим төлөнүгэр,
-Эрэн санаам сайыныгар.
-
-Ханнык да ыар охсууну,
-Ханнык да ыар сохсону
-Эйигиттэн халбарытыам,
-Эһиэм, уоттуом, барчалыам.
-
-Эн барыҥый муннуккар
-Күн мичээрин түһэриэм,
-Санньыппакка, салгыбакка,
-Эн сүрэххин ириэриэм.
-
-Эйигин олох албыныттан,
-Эрэн, экчи арчылыам.
-Уонна санаам сайынынан
-Киэҥ аартыкка таһаарыам...
-Эрэн илиим эрчимигэр,
-Эрэн сүрэҕим төлөнүгэр,
-Эрэн санаам сайыныгар.
-
-Экчи эрэн,
-Эрэн миэхэ.
-
-Оччоҕо 
-Эмньик күүстэниэм,
-Иэйэр
-Эдэр сүрэхтэниэм,
-Күн күлүмэ өйдөнүөм.
-
-Эрэн миэхэ.
-Эрэн!</div>
-          <div class="song-meta">Мел. Күннэй</div>
-        </div>
-
-        <!-- Песня 10 с аудиоплеером -->
-        <div class="song-card">
-          <div class="song-title">Күһүн</div>
-          <div class="audio-player" id="player-kuuhun">
-            <audio id="audio-kuuhun" preload="metadata">
-              <source src="songs/kuuhun.mp3" type="audio/mpeg">
-              <source src="songs/kuuhun.ogg" type="audio/ogg">
-              Ваш браузер не поддерживает аудио элементы.
-            </audio>
-            <div class="player-controls">
-              <button class="play-btn" onclick="togglePlay('kuuhun')">▶</button>
-              <div class="progress-container" onclick="seek('kuuhun', event)">
-                <div class="progress-bar" id="progress-kuuhun"></div>
-              </div>
-              <div class="time">
-                <span id="currentTime-kuuhun">0:00</span>
-                <span id="duration-kuuhun">0:00</span>
-              </div>
-            </div>
-            <div class="volume-controls">
-              <span class="volume-icon">🔊</span>
-              <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1" onchange="setVolume('kuuhun', this.value)">
-            </div>
-          </div>
-          <div class="song-content">Хайдах эрэ туспатык
-Миигин өрүү долгутар
-Күһүҥҥү тыам нап-намыын
-Куру-һары чуумпута.
-
-Көтөҕөтө түспүт тыа
-Курууһуба курдук сэндэ,
-Ол тыа устун туос сатыы
-Тыаһа суох хаамар бэрдин.
-
-Эн атаҕыҥ анныгар
-Көбүөр – көмүс көтөҕө,
-Уһун дьогдьоот салгына
-Эн сүрэҕин көтөҕөр.
-
-Сайыҥҥилыы чуопчаара
-Онно чыычаах ыллаабат,
-Ол эрээри дууһаҕар
-Ырыа ааспат-арахпат.
-
-Толоон, тыа, маар – барыта
-Кэҥээбиккэ дылы дуу?
-Манна киһи санаата
-Эмиэ сырдык, киэҥ, холку.
-
-...Кырдьар сааспар мин маннык
-Холку, намыын буолларбын.
-Саллар сааспын туоламмын
-Номоҕоннук сыттарбын!
-
-Хайдах эрэ туспатык
-Миигин өрүү долгутар
-Күһүҥҥү тыам нап-намыын
-Куру-һары чуумпута.</div>
-          <div class="song-meta">Ырыа хомуурунньуга</div>
-        </div>
-        <!-- Добавьте остальные песни по аналогии -->
       </div>
     </div>
   </div>
 </div>
 
-<!-- Модальное окно -->
 <div id="wordModal" class="modal">
   <div class="modal-content">
     <div class="modal-header">
@@ -1523,7 +990,7 @@ input:focus {
 </div>
 
 <script>
-// ВАШ ОРИГИНАЛЬНЫЙ ФУНКЦИОНАЛ СЛОВАРЯ
+// Данные слов
 const entries = [
   {
     "id": 1,
@@ -2339,65 +1806,670 @@ const entries = [
   },
 ];
 
+// Данные песен
+const songsData = [
+  {
+    id: 1,
+    title: "Сайыҥҥы",
+    content: `Саймаарыйар күнүм тахсан
+Аан дойдубар анаарар,
+Арылы тиэрбэс көлүччэм
+Көмүс долгунун көтөҕөр.
+
+Сыһыыларым сиккиэринэн 
+Сыймаарыччы тарааннылар,
+Сир симэҕэ сибэккилэрим
+Сиигинэн симириҥнииллэр.
+
+Тунах үрүмэччилэрэ туртаҥнаһа
+Хонууга хойдо тэлээрбиттэр,
+Ырыа чыычаахтарым куоталаһа
+Чыбыгырыы чугдаарбыттар.
+
+Оой, арылыйар алааһым,
+Уйгу сайынтан итирдим,
+Көҥүл санаабын батыһан
+Күн көрүгэр көҕүйдүм.
+
+Тунах үрүмэччитэ буоламмын
+Сир симэҕин ситэрсиэм,
+Күөрэгэй чычаах буоламмын
+Күөх дойдубун хоһуйуом.`,
+    meta: "Мел. Ульяна Сергучева",
+    audioId: "sayynghi"
+  },
+  {
+    id: 2,
+    title: "Суоллар",
+    content: `Мин үйэм улуу хорук тымырдара буолан,
+Айгысталлар аараан аартыктар...
+Ол хорук тымыр биир кыһыл таммаҕа буола,
+Мин күө-дьаа тахсабын айан суолугар.
+
+Арыт ытыллыбыт быыра ох оҕото буолан, 
+Ахсым айаннары айанныыбын,
+Арыт тумараҕа муммут тугутчаан курдук,
+Туора дьон ыырдарыгар мунчаарабын.
+
+Оо, ол эрээри хайаан да өтөхпөр төннөбүн,
+Ырбыт айан атыныы иҥэрсийэ...
+Ол улуу түбэлтэрэн кэлээтин атыҥырыы көрөбүн
+Төрөөбүт алааспын мыына, соҥуйа...`,
+    meta: "Ырыа хомуурунньуга",
+    audioId: "suollar"
+  },
+  {
+    id: 3,
+    title: "Саха үҥкүүтэ",
+    content: `Үрүмэччи үөрүн курдук,
+Арыы-дьэҥкир халлаан курдук,
+Көөнньөрүүлээх кымыс курдук,
+Көҥүл санаа кыымын курдук
+Дьоллоох саха кыргыттара
+Чороон тутан таҕыстылар.
+
+Ойуу-дьарҕаа тирэҥсэллэр
+Оһуор үктээн киирдилэр,
+Нуоҕай лабаа илиилэр
+Дьол ырыатын тистилэр...
+
+Үөрэ сөхпүт санаабар
+Алаас тыала аҥыс гынар.
+
+Чуумпу Лена долгунунуу,
+Туундара үрүҥ кубатыныы,
+Алаас хотун хатыҥыныы,
+Атан эрэр ньургуһуннуу
+Намыыннарын, наскыылларын,
+Наҕылларын баҕастарын!
+
+Кэрэ бэлиэ кэпсээн курдук,
+Сэрэтиилээх сэһэн курдук,
+Ылбай чаҕаан ырыа курдук,
+Ыраас таптал тылын курдук
+Сахам намыын үҥкүүтэ
+Сахам сирин кэриэтэ!`,
+    meta: "Мел. Аркадий Алексеев",
+    audioId: "sakha-unkuute"
+  },
+  {
+    id: 4,
+    title: "Ферма кыргыттара",
+    content: `Билэр дьонум оҕолорун – 
+Биэс эйэҕэс кыргыттары
+Үөрэ даҕаны мин көрдүм
+Үүт-Көлүйэ ферматыгар.
+
+Үрүҥ көмүс бастыҥа,
+Илин-кэлин кэбиһэр,
+Халадаайдаах былааччыйа,
+Хаарыс харсыат кэппиттэр.
+
+Тоҕус былас да буолбатар – 
+Тохтор долгун суһуохтаахтар,
+Туйаарыма Куо да буолбатар
+Туналҕаннаах ньуурдаахтар.
+
+Хатыҥ буолан наскылдьыһа
+Ханыылаһан тахсаннар,
+Сайыҥҥы кэми сайыһа
+Сайдыы-сайдыы хаамсаллар.
+
+Чороон үҥкүүтүн толорон
+Нуоҕалдьыһан киирэргитин
+Уйулҕам хамсыы, долгуйа
+Олус даҕаны көһүттүм.
+
+Ыраах Куорунай тыатыгар,
+Алаас, сайылык дойдубар
+Маннык нарын барахсаттар
+Балаҕан аайи баар буолбат.`,
+    meta: "Ырыа хомуурунньуга",
+    audioId: "ferma-kyrgyttara"
+  },
+  {
+    id: 5,
+    title: "Киһиэхэ – төрөөбүт дойдута",
+    content: `Киһиэхэ – төрөөбүт дойдута
+Төрөппүт ийэтин кэриэтэ
+:
+Сүрэҕин ытатан, ыллатан,
+Норуот кырдьыгар үөрэтэр.
+
+Киһиэхэ – төрөөбүт дойдута
+Төрөппүт аҕаҕа холонор
+:
+Тоҥорон, буһаран, эрчитэн,
+Ньыгыл укулаат оҥорор.
+
+Киһиэхэ – төрөөбүт дойдута
+Таптыыр дьахтарын кэриэтэ
+:
+Кини дьоло, хомолтото
+Хоодуот, уйаҕас сүрэхтиир.
+
+Киһиэхэ – төрөөбүт дойдута
+Таптыыр оҕотун тэҥнээҕэ
+:
+Кини кэскилин туһугар
+Тыынан да толук ууруоҕа.`,
+    meta: "Ырыа хомуурунньуга",
+    audioId: "kihiyehe-toroobyt-doydu"
+  },
+  {
+    id: 6,
+    title: "Бу тыллар буолбатах – кубалар",
+    content: `Бу тыллар буолбатах – кубалар.
+Сааскылыы таптаһар кубалар,
+Ып-ыраас, муус маҥан кубалар
+Санньыардык, нарыннык дайаллар
+Бу тыллар буолбатах – сарыаллар.
+
+Кыраман сааскы күөх саҕахпар
+Сандаарар ылааҥы сарыаллар
+Сайаҕас дууһаҕа сырдыыллар.
+
+Бу тыллар буолбатах – ырыалар,
+Таптаабыт сүрэхтэн саҕыллар,
+Абылыы, долгута дуорайар
+Айыы-хаан тып-тыыннаах ырыалар.`,
+    meta: "Ырыа хомуурунньуга",
+    audioId: "bu-tyllar"
+  },
+  {
+    id: 7,
+    title: "Доҕоччугуом, тоҕо маннык?..",
+    content: `Доҕоччугуом, тоҕо маннык
+Тоҥкурууннук  көрсөн,
+Туохтан дууһаҥ туоххаһыйан
+Чоҕулуччу көрдүн?..
+
+Миигиттэн дуу хоргутаҥҥын
+Үөрэ тоһуйбатыҥ,
+Тугу мин туора туттаммын
+Маннык киэр хайыстыҥ?..
+
+Ыар буруйдаах буоллахпына,
+Муҥатына  ааттыам; 
+Буруйа да суоҕум иһин
+Буруйдаахтыы туттуом...
+
+Хаарыан дьиэм хараҥаччыта,
+Халлаан курдук халыйыый; 
+Үрүҥ дьиэм үрүмэччитэ,
+Үөрэн-көтөн кэлиий?..`,
+    meta: "Ырыа хомуурунньуга",
+    audioId: "dogchchuguom"
+  },
+  {
+    id: 8,
+    title: "Доҕоруом, дабай күөх сыырдаргын",
+    content: `Доҕоруом, дабай күөх сыырдаргын,
+Мырааҥҥа көрүс күн тахсыытын.
+Эн өрүү инники сырдыыгын,
+Эн өрүү сүрэхпэр ыллыыгын.
+
+Хараҥа кэрэ да киэһэлэр...
+Халлааҥҥа сулустар хойдоллор
+:
+Эйигин, эйигин кинилэр
+Этэргэ, кэпсииргэ дылылар.
+
+Сылаас тыал иэдэспин бигиирин
+Эн тыыныҥ кэлэр дии саныыбын,
+Өрүллэр сүүрүктэр тыастарын
+Эн көмүс куоласкар холуубун.
+
+Доҕоруом, дабай күөх сыырдаргын,
+Мырааҥҥа көрүс күн тахсыытын.
+Эн өрүү инники сырдыыгын,
+Ол иһин, ол иһин таптыыбын.`,
+    meta: "Ырыа хомуурунньуга",
+    audioId: "dogoruom"
+  },
+  {
+    id: 9,
+    title: "Эрэн миэхэ",
+    content: `Эрэн миэхэ,
+Эрэн миэхэ...
+Эрэн илиим эрчимигэр,
+Эрэн сүрэҕим төлөнүгэр,
+Эрэн санаам сайыныгар.
+
+Ханнык да ыар охсууну,
+Ханнык да ыар сохсону
+Эйигиттэн халбарытыам,
+Эһиэм, уоттуом, барчалыам.
+
+Эн барыҥый муннуккар
+Күн мичээрин түһэриэм,
+Санньыппакка, салгыбакка,
+Эн сүрэххин ириэриэм.
+
+Эйигин олох албыныттан,
+Эрэн, экчи арчылыам.
+Уонна санаам сайынынан
+Киэҥ аартыкка таһаарыам...
+Эрэн илиим эрчимигэр,
+Эрэн сүрэҕим төлөнүгэр,
+Эрэн санаам сайыныгар.
+
+Экчи эрэн,
+Эрэн миэхэ.
+
+Оччоҕо 
+Эмньик күүстэниэм,
+Иэйэр
+Эдэр сүрэхтэниэм,
+Күн күлүмэ өйдөнүөм.
+
+Эрэн миэхэ.
+Эрэн!`,
+    meta: "Мел. Күннэй",
+    audioId: "eren-mihe"
+  },
+  {
+    id: 10,
+    title: "Күһүн",
+    content: `Хайдах эрэ туспатык
+Миигин өрүү долгутар
+Күһүҥҥү тыам нап-намыын
+Куру-һары чуумпута.
+
+Көтөҕөтө түспүт тыа
+Курууһуба курдук сэндэ,
+Ол тыа устун туос сатыы
+Тыаһа суох хаамар бэрдин.
+
+Эн атаҕыҥ анныгар
+Көбүөр – көмүс көтөҕө,
+Уһун дьогдьоот салгына
+Эн сүрэҕин көтөҕөр.
+
+Сайыҥҥилыы чуопчаара
+Онно чыычаах ыллаабат,
+Ол эрээри дууһаҕар
+Ырыа ааспат-арахпат.
+
+Толоон, тыа, маар – барыта
+Кэҥээбиккэ дылы дуу?
+Манна киһи санаата
+Эмиэ сырдык, киэҥ, холку.
+
+...Кырдьар сааспар мин маннык
+Холку, намыын буолларбын.
+Саллар сааспын туоламмын
+Номоҕоннук сыттарбын!
+
+Хайдах эрэ туспатык
+Миигин өрүү долгутар
+Күһүҥҥү тыам нап-намыын
+Куру-һары чуумпута.`,
+    meta: "Ырыа хомуурунньуга",
+    audioId: "kuuhunө"
+  }
+];
+
+// Глобальные переменные
 let favorites = new Set(JSON.parse(localStorage.getItem('dictionaryFavorites')) || []);
 let activeLetter = null;
 let currentWordId = null;
 let currentPage = 'dictionary';
+const audioPlayers = {};
 
+// DOM элементы
 const lettersEl = document.getElementById('letters');
 const listEl = document.getElementById('list');
 const searchEl = document.getElementById('search');
-const searchClearEl = document.querySelector('.search-button');
 const searchInfoEl = document.getElementById('searchInfo');
 const favEl = document.getElementById('favorites');
 const modal = document.getElementById('wordModal');
 const closeBtn = document.querySelector('.close');
 
-// Объект для хранения аудио элементов
-const audioPlayers = {};
+// Функции для словаря
+function searchWords(query) {
+  const q = query.toLowerCase().trim();
+  if (!q) return entries;
+  return entries.filter(item => item.word.toLowerCase().includes(q));
+}
 
-// Инициализация аудиоплееров
+function updateSearchInfo(results, query) {
+  if (!searchInfoEl) return;
+  if (!query) {
+    searchInfoEl.textContent = 'Начните вводить слово для поиска';
+    return;
+  }
+  if (results.length === 0) {
+    searchInfoEl.textContent = `По запросу "${query}" ничего не найдено`;
+  } else {
+    searchInfoEl.textContent = `Найдено ${results.length} слов по запросу "${query}"`;
+  }
+}
+
+function clearSearch() {
+  if (searchEl) searchEl.value = '';
+  if (searchInfoEl) searchInfoEl.textContent = 'Начните вводить слово для поиска';
+  renderList();
+}
+
+function showPage(page) {
+  const dictPage = document.getElementById('dictionary-page');
+  const songsPage = document.getElementById('songs-page');
+  const subtitle = document.getElementById('pageSubtitle');
+  
+  if (dictPage) dictPage.style.display = page === 'dictionary' ? 'block' : 'none';
+  if (songsPage) songsPage.style.display = page === 'songs' ? 'block' : 'none';
+  
+  document.querySelectorAll('.nav-tab').forEach(btn => btn.classList.remove('active'));
+  
+  if (page === 'dictionary') {
+    document.querySelector('.nav-tab[onclick="showPage(\'dictionary\')"]').classList.add('active');
+    if (subtitle) subtitle.textContent = 'Словарь якутского языка';
+  } else {
+    document.querySelector('.nav-tab[onclick="showPage(\'songs\')"]').classList.add('active');
+    if (subtitle) subtitle.textContent = 'Якутские песни и стихи';
+    setTimeout(() => renderSongsList(), 0);
+  }
+  currentPage = page;
+}
+
+function renderLetters() {
+  if (!lettersEl) return;
+  const letters = [...new Set(entries.map(e => (e.word||'')[0]?.toUpperCase()))].filter(Boolean).sort((a,b)=> a.localeCompare(b,'ru'));
+  lettersEl.innerHTML = '<button class="letter-button active" data-letter="">Все</button>' + 
+    letters.map(l => `<button class="letter-button" data-letter="${l}">${l}</button>`).join('');
+  
+  lettersEl.querySelectorAll('.letter-button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      activeLetter = btn.dataset.letter || null;
+      lettersEl.querySelectorAll('.letter-button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderList();
+    });
+  });
+}
+
+function renderList() {
+  if (!listEl || !searchInfoEl) return;
+  const q = searchEl ? searchEl.value.trim() : '';
+  let filtered = entries;
+  
+  if (q) filtered = searchWords(q);
+  else if (activeLetter) filtered = entries.filter(e => (e.word||'')[0]?.toUpperCase() === activeLetter);
+  
+  updateSearchInfo(filtered, q);
+  updateStats(filtered.length);
+
+  if (filtered.length === 0) {
+    listEl.innerHTML = '<div class="term-card text-center">Ничего не найдено</div>';
+    if (favEl) favEl.innerHTML = '<li style="color:rgba(255,255,255,0.6)">Пока нет избранных слов</li>';
+    return;
+  }
+
+  listEl.innerHTML = filtered.map(item => `
+    <div class="card" data-id="${item.id}" onclick="openModal(${item.id})">
+      ${item.image ? `<img src="${item.image}" alt="${item.word}" class="card-image" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">` : ''}
+      ${!item.image ? `<div class="image-placeholder">📷 Нет фото</div>` : '<div class="image-placeholder" style="display:none">📷 Нет фото</div>'}
+      <div class="word">${escapeHtml(item.word)} <span class="pos">${escapeHtml(item.pos||'')}</span></div>
+      <div class="def">${escapeHtml(((item.definition||'').substring(0, 100) + ((item.definition||'').length > 100 ? '...' : '')))}</div>
+      <div class="actions">
+        <button class="btn" onclick="event.stopPropagation();openModal(${item.id})">📖 Подробнее</button>
+        <button class="btn" onclick="event.stopPropagation();toggleFav(${item.id})">${favorites.has(item.id)?'★':'☆'} Избранное</button>
+      </div>
+    </div>
+  `).join('');
+  renderFavorites();
+}
+
+function renderFavorites() {
+  if (!favEl) return;
+  const favs = entries.filter(e => favorites.has(e.id));
+  if (favs.length === 0) {
+    favEl.innerHTML = '<li style="color:rgba(255,255,255,0.6)">Пока нет избранных слов</li>';
+    return;
+  }
+  favEl.innerHTML = favs.map(f => `
+    <li onclick="openModal(${f.id})">
+      ${escapeHtml(f.word)}
+      <button class="remove-fav" onclick="event.stopPropagation();toggleFav(${f.id})" title="Удалить из избранного">×</button>
+    </li>
+  `).join('');
+}
+
+function updateStats(foundCount = entries.length) {
+  const totalWordsEl = document.getElementById('totalWords');
+  const favCountEl = document.getElementById('favCount');
+  const foundCountEl = document.getElementById('foundCount');
+  
+  if (totalWordsEl) totalWordsEl.textContent = entries.length;
+  if (favCountEl) favCountEl.textContent = favorites.size;
+  if (foundCountEl) foundCountEl.textContent = foundCount;
+}
+
+function openModal(id) {
+  const item = entries.find(e => e.id === id);
+  if (!item || !modal) return;
+  
+  currentWordId = id;
+  const modalTitle = document.getElementById('modalWordTitle');
+  const modalWord = document.getElementById('modalWord');
+  const modalPos = document.getElementById('modalPos');
+  const modalDefinition = document.getElementById('modalDefinition');
+  
+  if (modalTitle) modalTitle.textContent = item.word;
+  if (modalWord) modalWord.textContent = item.word;
+  if (modalPos) modalPos.textContent = item.pos || 'не указано';
+  if (modalDefinition) modalDefinition.textContent = item.definition || 'нет определения';
+  
+  const img = document.getElementById('modalWordImage');
+  const placeholder = document.querySelector('.word-image .placeholder');
+  
+  if (item.image && img && placeholder) {
+    img.src = item.image;
+    img.alt = item.word;
+    img.style.display = 'block';
+    placeholder.style.display = 'none';
+    img.onerror = function() {
+      this.style.display = 'none';
+      placeholder.style.display = 'block';
+      placeholder.textContent = '📷 Изображение не загружено';
+    };
+  } else if (img && placeholder) {
+    img.style.display = 'none';
+    placeholder.style.display = 'block';
+    placeholder.textContent = '📷 Изображение отсутствует';
+  }
+  
+  modal.style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  if (modal) {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }
+}
+
+function toggleFav(id) {
+  if (favorites.has(id)) {
+    favorites.delete(id);
+  } else {
+    favorites.add(id);
+  }
+  
+  try {
+    localStorage.setItem('dictionaryFavorites', JSON.stringify([...favorites]));
+  } catch (e) {
+    console.warn('Не удалось сохранить в localStorage');
+  }
+  
+  renderList();
+  renderFavorites();
+  updateStats();
+}
+
+function copyText(id) {
+  const item = entries.find(e => e.id === id);
+  if (!item) return;
+  const txt = `${item.word} — ${item.definition}`;
+  navigator.clipboard.writeText(txt).then(() => {
+    alert('Скопировано: ' + item.word);
+  });
+}
+
+// Функции для песен
+function searchSongs(query) {
+  const q = query.toLowerCase().trim();
+  if (!q) return songsData;
+  
+  return songsData.filter(song => 
+    song.title.toLowerCase().includes(q)
+  );
+}
+
+function clearSongsSearch() {
+  const songsSearch = document.getElementById('songs-search');
+  if (songsSearch) songsSearch.value = '';
+  renderSongsList();
+  updateSongsSearchInfo(songsData.length, '');
+}
+
+function updateSongsSearchInfo(resultsCount, query) {
+  const infoEl = document.getElementById('songsSearchInfo');
+  if (!infoEl) return;
+  
+  if (!query) {
+    infoEl.textContent = `Всего песен: ${songsData.length}`;
+    return;
+  }
+  
+  if (resultsCount === 0) {
+    infoEl.textContent = `По запросу "${query}" песен не найдено`;
+  } else {
+    infoEl.textContent = `Найдено ${resultsCount} песен по запросу "${query}"`;
+  }
+}
+
+function renderSongsList() {
+  const songsListEl = document.getElementById('songs-list');
+  const searchInput = document.getElementById('songs-search');
+  const query = searchInput ? searchInput.value.trim() : '';
+  
+  if (!songsListEl) return;
+  
+  let filteredSongs = songsData;
+  
+  if (query) {
+    filteredSongs = searchSongs(query);
+  }
+  
+  updateSongsSearchInfo(filteredSongs.length, query);
+  
+  if (filteredSongs.length === 0) {
+    songsListEl.innerHTML = `
+      <div class="song-card text-center">
+        <div class="song-content text-white-60">
+          Песни не найдены
+        </div>
+      </div>
+    `;
+    return;
+  }
+  
+  songsListEl.innerHTML = filteredSongs.map(song => `
+    <div class="song-card">
+      <div class="song-title">${escapeHtml(song.title)}</div>
+      ${song.audioId ? `
+      <div class="audio-player" id="player-${song.audioId}">
+        <audio id="audio-${song.audioId}" preload="metadata">
+          <source src="songs/${song.audioId}.mp3" type="audio/mpeg">
+          <source src="songs/${song.audioId}.ogg" type="audio/ogg">
+          Ваш браузер не поддерживает аудио элементы.
+        </audio>
+        <div class="player-controls">
+          <button class="play-btn" onclick="togglePlay('${song.audioId}')">▶</button>
+          <div class="progress-container" onclick="seek('${song.audioId}', event)">
+            <div class="progress-bar" id="progress-${song.audioId}"></div>
+          </div>
+          <div class="time">
+            <span id="currentTime-${song.audioId}">0:00</span>
+            <span id="duration-${song.audioId}">0:00</span>
+          </div>
+        </div>
+        <div class="volume-controls">
+          <span class="volume-icon">🔊</span>
+          <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1" onchange="setVolume('${song.audioId}', this.value)">
+        </div>
+      </div>
+      ` : ''}
+      <div class="song-content">${escapeHtml(song.content)}</div>
+      <div class="song-meta">${escapeHtml(song.meta)}</div>
+    </div>
+  `).join('');
+  
+  initAudioPlayersForSongs(filteredSongs);
+}
+
+// Аудио функции
 function initAudioPlayers() {
-  const songs = [
-    'sayynghi', 'suollar', 'sakha-unkuute', 'ferma-kyrgyttara', 
-    'kihiyehe-toroobyt-doydu', 'bu-tyllar', 'dogchchuguom', 
-    'dogoruom', 'eren-mihe', 'kuuhun'
-  ];
+  const songs = ['sayynghi', 'suollar', 'sakha-unkuute', 'ferma-kyrgyttara', 'kihiyehe-toroobyt-doydu'];
   
   songs.forEach(songId => {
     const audio = document.getElementById(`audio-${songId}`);
     if (audio) {
-      audioPlayers[songId] = {
-        audio: audio,
-        isPlaying: false,
-        progress: document.getElementById(`progress-${songId}`),
-        currentTime: document.getElementById(`currentTime-${songId}`),
-        duration: document.getElementById(`duration-${songId}`),
-        playBtn: document.querySelector(`#player-${songId} .play-btn`)
-      };
-
-      // События для обновления прогресса
-      audio.addEventListener('loadedmetadata', () => {
-        audioPlayers[songId].duration.textContent = formatTime(audio.duration);
-      });
-
-      audio.addEventListener('timeupdate', () => {
-        updateProgress(songId);
-      });
-
-      audio.addEventListener('ended', () => {
-        resetPlayer(songId);
-      });
+      initSingleAudioPlayer(songId, audio);
     }
   });
 }
 
-// Функции для работы с аудио
+function initAudioPlayersForSongs(songs) {
+  songs.forEach(song => {
+    if (song.audioId) {
+      const audio = document.getElementById(`audio-${song.audioId}`);
+      if (audio && !audioPlayers[song.audioId]) {
+        initSingleAudioPlayer(song.audioId, audio);
+      }
+    }
+  });
+}
+
+function initSingleAudioPlayer(songId, audio) {
+  const progress = document.getElementById(`progress-${songId}`);
+  const currentTime = document.getElementById(`currentTime-${songId}`);
+  const duration = document.getElementById(`duration-${songId}`);
+  const playBtn = document.querySelector(`#player-${songId} .play-btn`);
+  
+  if (progress && currentTime && duration && playBtn) {
+    audioPlayers[songId] = {
+      audio: audio,
+      isPlaying: false,
+      progress: progress,
+      currentTime: currentTime,
+      duration: duration,
+      playBtn: playBtn
+    };
+
+    audio.addEventListener('loadedmetadata', () => {
+      if (audioPlayers[songId] && audioPlayers[songId].duration) {
+        audioPlayers[songId].duration.textContent = formatTime(audio.duration);
+      }
+    });
+
+    audio.addEventListener('timeupdate', () => {
+      updateProgress(songId);
+    });
+
+    audio.addEventListener('ended', () => {
+      resetPlayer(songId);
+    });
+  }
+}
+
 function togglePlay(songId) {
   const player = audioPlayers[songId];
   if (!player) return;
 
-  // Останавливаем все другие песни
   Object.keys(audioPlayers).forEach(id => {
     if (id !== songId && audioPlayers[id].isPlaying) {
       audioPlayers[id].audio.pause();
@@ -2463,188 +2535,7 @@ function formatTime(seconds) {
   return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
 }
 
-// Остальные функции словаря остаются без изменений
-function searchWords(query) {
-  const q = query.toLowerCase().trim();
-  if (!q) return entries;
-  return entries.filter(item => item.word.toLowerCase().includes(q));
-}
-
-function updateSearchInfo(results, query) {
-  if (!query) {
-    searchInfoEl.textContent = 'Начните вводить слово для поиска';
-    return;
-  }
-  if (results.length === 0) {
-    searchInfoEl.textContent = `По запросу "${query}" ничего не найдено`;
-  } else {
-    searchInfoEl.textContent = `Найдено ${results.length} слов по запросу "${query}"`;
-  }
-}
-
-function clearSearch() {
-  searchEl.value = '';
-  searchInfoEl.textContent = 'Начните вводить слово для поиска';
-  renderList();
-}
-
-function showPage(page) {
-  document.getElementById('dictionary-page').style.display = page === 'dictionary' ? 'block' : 'none';
-  document.getElementById('songs-page').style.display = page === 'songs' ? 'block' : 'none';
-  
-  document.querySelectorAll('.nav-tab').forEach(btn => btn.classList.remove('active'));
-  
-  if (page === 'dictionary') {
-    document.querySelector('.nav-tab[onclick="showPage(\'dictionary\')"]').classList.add('active');
-    document.getElementById('pageSubtitle').textContent = 'Словарь якутского языка';
-  } else {
-    document.querySelector('.nav-tab[onclick="showPage(\'songs\')"]').classList.add('active');
-    document.getElementById('pageSubtitle').textContent = 'Якутские песни и стихи';
-  }
-  currentPage = page;
-}
-
-function init() {
-  renderLetters();
-  renderList();
-  updateStats();
-  initAudioPlayers();
-  
-  searchEl.addEventListener('input', function() {
-    renderList();
-  });
-  
-  closeBtn.addEventListener('click', closeModal);
-  window.addEventListener('click', (e) => {
-    if (e.target === modal) closeModal();
-  });
-  
-  createParticles();
-}
-
-function renderLetters() {
-  const letters = [...new Set(entries.map(e => (e.word||'')[0]?.toUpperCase()))].filter(Boolean).sort((a,b)=> a.localeCompare(b,'ru'));
-  lettersEl.innerHTML = '<button class="letter-button active" data-letter="">Все</button>' + 
-    letters.map(l => `<button class="letter-button" data-letter="${l}">${l}</button>`).join('');
-  
-  lettersEl.querySelectorAll('.letter-button').forEach(btn => {
-    btn.addEventListener('click', () => {
-      activeLetter = btn.dataset.letter || null;
-      lettersEl.querySelectorAll('.letter-button').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      renderList();
-    });
-  });
-}
-
-function renderList() {
-  const q = searchEl.value.trim();
-  let filtered = entries;
-  
-  if (q) filtered = searchWords(q);
-  else if (activeLetter) filtered = entries.filter(e => (e.word||'')[0]?.toUpperCase() === activeLetter);
-  
-  updateSearchInfo(filtered, q);
-  updateStats(filtered.length);
-
-  if (filtered.length === 0) {
-    listEl.innerHTML = '<div class="term-card text-center">Ничего не найдено</div>';
-    favEl.innerHTML = '<li style="color:rgba(255,255,255,0.6)">Пока нет избранных слов</li>';
-    return;
-  }
-
-  listEl.innerHTML = filtered.map(item => `
-    <div class="card" data-id="${item.id}" onclick="openModal(${item.id})">
-      ${item.image ? `<img src="${item.image}" alt="${item.word}" class="card-image" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">` : ''}
-      ${!item.image ? `<div class="image-placeholder">📷 Нет фото</div>` : '<div class="image-placeholder" style="display:none">📷 Нет фото</div>'}
-      <div class="word">${escapeHtml(item.word)} <span class="pos">${escapeHtml(item.pos||'')}</span></div>
-      <div class="def">${escapeHtml((item.definition||'').substring(0, 100) + (item.definition.length > 100 ? '...' : ''))}</div>
-      <div class="actions">
-        <button class="btn" onclick="event.stopPropagation();openModal(${item.id})">📖 Подробнее</button>
-        <button class="btn" onclick="event.stopPropagation();toggleFav(${item.id})">${favorites.has(item.id)?'★':'☆'} Избранное</button>
-      </div>
-    </div>
-  `).join('');
-  renderFavorites();
-}
-
-function renderFavorites() {
-  const favs = entries.filter(e => favorites.has(e.id));
-  if (favs.length === 0) {
-    favEl.innerHTML = '<li style="color:rgba(255,255,255,0.6)">Пока нет избранных слов</li>';
-    return;
-  }
-  favEl.innerHTML = favs.map(f => `
-    <li onclick="openModal(${f.id})">
-      ${escapeHtml(f.word)}
-      <button class="remove-fav" onclick="event.stopPropagation();toggleFav(${f.id})" title="Удалить из избранного">×</button>
-    </li>
-  `).join('');
-}
-
-function updateStats(foundCount = entries.length) {
-  document.getElementById('totalWords').textContent = entries.length;
-  document.getElementById('favCount').textContent = favorites.size;
-  document.getElementById('foundCount').textContent = foundCount;
-}
-
-function openModal(id) {
-  const item = entries.find(e => e.id === id);
-  if (!item) return;
-  
-  currentWordId = id;
-  document.getElementById('modalWordTitle').textContent = item.word;
-  document.getElementById('modalWord').textContent = item.word;
-  document.getElementById('modalPos').textContent = item.pos || 'не указано';
-  document.getElementById('modalDefinition').textContent = item.definition || 'нет определения';
-  
-  const img = document.getElementById('modalWordImage');
-  const placeholder = document.querySelector('.word-image .placeholder');
-  
-  if (item.image) {
-    img.src = item.image;
-    img.alt = item.word;
-    img.style.display = 'block';
-    placeholder.style.display = 'none';
-    img.onerror = function() {
-      this.style.display = 'none';
-      placeholder.style.display = 'block';
-      placeholder.textContent = '📷 Изображение не загружено';
-    };
-  } else {
-    img.style.display = 'none';
-    placeholder.style.display = 'block';
-    placeholder.textContent = '📷 Изображение отсутствует';
-  }
-  
-  modal.style.display = 'block';
-  document.body.style.overflow = 'hidden';
-}
-
-function closeModal() {
-  modal.style.display = 'none';
-  document.body.style.overflow = 'auto';
-}
-
-function toggleFav(id) {
-  if (favorites.has(id)) favorites.delete(id);
-  else favorites.add(id);
-  
-  localStorage.setItem('dictionaryFavorites', JSON.stringify([...favorites]));
-  renderList();
-  renderFavorites();
-  updateStats();
-}
-
-function copyText(id) {
-  const item = entries.find(e => e.id === id);
-  if (!item) return;
-  const txt = `${item.word} — ${item.definition}`;
-  navigator.clipboard.writeText(txt).then(() => {
-    alert('Скопировано: ' + item.word);
-  });
-}
-
+// Вспомогательные функции
 function escapeHtml(str) {
   if (!str) return '';
   return String(str)
@@ -2679,6 +2570,37 @@ function createParticles() {
     
     container.appendChild(particle);
   }
+}
+
+// Инициализация
+function init() {
+  renderLetters();
+  renderList();
+  updateStats();
+  initAudioPlayers();
+  
+  if (searchEl) {
+    searchEl.addEventListener('input', function() {
+      renderList();
+    });
+  }
+  
+  const songsSearchEl = document.getElementById('songs-search');
+  if (songsSearchEl) {
+    songsSearchEl.addEventListener('input', function() {
+      renderSongsList();
+    });
+  }
+  
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeModal);
+  }
+  
+  window.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+  
+  createParticles();
 }
 
 document.addEventListener('DOMContentLoaded', init);
